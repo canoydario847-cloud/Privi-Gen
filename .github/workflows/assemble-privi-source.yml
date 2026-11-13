@@ -1,0 +1,40 @@
+name: Assemble Privi source workspace
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  assemble:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout Privi-Gen
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Configure Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Clone registered source projects and record commits
+        run: python3 privi_gen.py sync --dest ./privi-workspace
+      - name: Create per-project source indexes
+        shell: bash
+        run: |
+          set -euo pipefail
+          for repo in ./privi-workspace/Privi*; do
+            if [ -d "$repo/.git" ]; then
+              python3 privi_gen.py inventory --repo "$repo" --out "./privi-workspace/$(basename "$repo")-source-index.json"
+            fi
+          done
+      - name: Package source workspace (exclude Git internals)
+        run: tar -czf privi-source-workspace.tar.gz --exclude='.git' privi-workspace
+      - name: Upload reproducible source bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: privi-source-workspace
+          path: privi-source-workspace.tar.gz
+          retention-days: 7
