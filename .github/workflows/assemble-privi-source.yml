@@ -2,6 +2,12 @@ name: Assemble Privi source workspace
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'catalog.json'
+      - 'privi_gen.py'
+      - '.github/workflows/assemble-privi-source.yml'
 
 permissions:
   contents: read
