@@ -19,7 +19,7 @@ python3 privi_gen.py inventory --repo ./privi-workspace/Privi-Network --out ./pr
 python3 -m unittest discover -s tests -v
 ```
 
-`sync` clones public source repositories into an **empty** destination directory and records their exact commit SHAs in `privi-lock.json`. It never overwrites an existing checkout. An empty repository is represented in the registry but is not cloned.
+`sync` clones **public** source repositories by default into a workspace directory and records their exact commit SHAs in `privi-lock.json`. It never overwrites an existing checkout. An empty repository is represented in the registry but is not cloned. Private repositories are recorded as `skipped-private`, not copied. For a private local workspace, use `--include-private` only on a trusted machine with your own authorized Git credentials; never enable it in public GitHub Actions.
 
 `inventory` hashes tracked source/configuration files from a local Git checkout. It ignores generated artifacts, symlinks, Git metadata, untracked files and large binaries. The JSON inventory provides traceability, not a security audit or deployment certification.
 
@@ -35,3 +35,9 @@ Each project can add a read-only CI check which checks out a **pinned** Privi-Ge
 - Avoid writing generated indexes back to source branches.
 
 Copyright © 2026 Privi World Corp. All rights reserved for original Privi-Gen material, subject to any applicable third-party terms.
+
+## Source workspace artifact
+
+The [Assemble Privi source workspace](https://github.com/canoydario847-cloud/Privi-Gen/actions/workflows/assemble-privi-source.yml) GitHub workflow packages **public source only** and its commit lockfile into a downloadable GitHub Actions artifact. The workflow never collects private repository source or secrets.
+
+Private projects (currently Privi and Privi-Chainflow) have their own read-only inventory workflow inside their **private** repositories. Access to their inventory artifacts follows the private repository's GitHub permissions. Their source is not published through Privi-Gen.
