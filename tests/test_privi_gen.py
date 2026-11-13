@@ -55,15 +55,22 @@ class SyncTests(unittest.TestCase):
     def test_sync_does_not_overwrite_existing_directory(self):
         with tempfile.TemporaryDirectory() as temp:
             base = Path(temp)
-            existing = base / "Privi"
+            existing = base / "Privi-Network"
             existing.mkdir()
             marker = existing / "do-not-overwrite"
             marker.write_text("keep me", encoding="utf-8")
             data = privi_gen.load_catalog()
-            result = privi_gen.sync(data, base, ["Privi"])
-            self.assertEqual(result["projects"]["Privi"]["status"], "skipped-existing")
+            result = privi_gen.sync(data, base, ["Privi-Network"])
+            self.assertEqual(result["projects"]["Privi-Network"]["status"], "skipped-existing")
             self.assertEqual(marker.read_text(encoding="utf-8"), "keep me")
             self.assertTrue((base / "privi-lock.json").exists())
+
+    def test_private_repo_is_not_cloned_by_default(self):
+        with tempfile.TemporaryDirectory() as temp:
+            base = Path(temp)
+            result = privi_gen.sync(privi_gen.load_catalog(), base, ["Privi"])
+            self.assertEqual(result["projects"]["Privi"]["status"], "skipped-private")
+            self.assertFalse((base / "Privi").exists())
 
     def test_sync_rejects_unknown_repo(self):
         with tempfile.TemporaryDirectory() as temp:
