@@ -57,19 +57,22 @@ def load_catalog(path: Path = CATALOG) -> dict:
             raise ValueError("Invalid branch or duplicate repository")
         if project.get("status") not in {"source", "empty"}:
             raise ValueError("Invalid source status")
+        if project.get("visibility") not in {"public", "private"}:
+            raise ValueError("Invalid repository visibility")
         names.add(name)
     return data
 
 
 def catalog_lines(data: dict) -> list[str]:
     return [
-        f'{p["name"]} [{p["status"]}] - {p["component"]}'
+        f'{p["name"]} [{p["status"]}, {p["visibility"]}] - {p["component"]}'
         for p in data["projects"]
     ]
 
 
-def sync(data: dict, destination: Path, only: list[str] | None = None) -> dict:
-    """Clone missing public repos; never modify or delete existing targets."""
+def sync(data: dict, destination: Path, only: list[str] | None = None,
+         include_private: bool = False) -> dict:
+    """Clone missing public repos by default, never overwriting existing targets."""
     projects = {p["name"]: p for p in data["projects"]}
     selected = only if only else list(projects)
     if len(selected) != len(set(selected)):
@@ -84,6 +87,9 @@ def sync(data: dict, destination: Path, only: list[str] | None = None) -> dict:
     for name in selected:
         project = projects[name]
         target = destination / name
+        if project["visibility"] == "private" and not include_private:
+            lock["projects"][name] = {"status": "skipped-private"}
+            continue
         if project["status"] == "empty":
             lock["projects"][name] = {"status": "empty"}
             continue
@@ -100,7 +106,8 @@ def sync(data: dict, destination: Path, only: list[str] | None = None) -> dict:
             commit = run_git("rev-parse", "HEAD", cwd=target)
             lock["projects"][name] = {"status": "cloned", "commit": commit}
         except (subprocess.CalledProcessError, subprocess.TimeoutExpired) as exc:
-            failures.append(f"{name}: {exc}")
+            details = exc.stderr.strip() if isinstance(exc, subprocess.CalledProcessError) and exc.stderr else str(exc)
+            failures.append(f"{name}: {details}")
             lock["projects"][name] = {"status": "failed"}
     (destination / "privi-lock.json").write_text(
         json.dumps(lock, sort_keys=True, indent=2) + "\n", encoding="utf-8"
@@ -171,6 +178,8 @@ def main(argv: list[str] | None = None) -> int:
     clone = commands.add_parser("sync", help="Clone missing repositories read-only")
     clone.add_argument("--dest", required=True, type=Path)
     clone.add_argument("--only", nargs="+", metavar="REPOSITORY")
+    clone.add_argument("--include-private", action="store_true",
+                       help="Explicitly attempt private clones using your local Git credentials; never use in public CI")
     index = commands.add_parser("inventory", help="SHA-256 inventory of tracked files")
     index.add_argument("--repo", required=True, type=Path)
     index.add_argument("--out", required=True, type=Path)
@@ -180,7 +189,7 @@ def main(argv: list[str] | None = None) -> int:
         if args.command == "catalog":
             print("\n".join(catalog_lines(data)))
         elif args.command == "sync":
-            lock = sync(data, args.dest, args.only)
+            lock = sync(data, args.dest, args.only, include_private=args.include_private)
             print(json.dumps(lock, indent=2))
         elif args.command == "inventory":
             result = inventory(args.repo)
