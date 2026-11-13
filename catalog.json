@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "owner": "canoydario847-cloud",
+  "projects": [
+    {
+      "name": "Privi-Network",
+      "branch": "main",
+      "component": "blockchain-mainnet-agents-apps",
+      "status": "source",
+      "source_roots": [
+        "mainnet",
+        "production-network",
+        "mcp-server",
+        "privi-car",
+        "jose-backend",
+        "gate-sdk",
+        "guard-sdk"
+      ]
+    },
+    {
+      "name": "Privi",
+      "branch": "main",
+      "component": "agent-gateway-and-core",
+      "status": "source",
+      "source_roots": [
+        "agent-gateway"
+      ]
+    },
+    {
+      "name": "Privi-Chain",
+      "branch": "main",
+      "component": "blockchain-interface",
+      "status": "source",
+      "source_roots": [
+        "BlockChain.jsx"
+      ]
+    },
+    {
+      "name": "Privi-Chainflow",
+      "branch": "main",
+      "component": "chainflow-source-archive",
+      "status": "source",
+      "source_roots": [
+        "privichain-source-2026-10-01.zip"
+      ]
+    },
+    {
+      "name": "Privi-Boot-code",
+      "branch": "main",
+      "component": "boot-code-project",
+      "status": "source",
+      "source_roots": [
+        "README.md"
+      ]
+    },
+    {
+      "name": "Privi-DAO",
+      "branch": "main",
+      "component": "dao-project",
+      "status": "source",
+      "source_roots": [
+        "README.md"
+      ]
+    },
+    {
+      "name": "Privi-DAO1",
+      "branch": "main",
+      "component": "dao-project-empty",
+      "status": "empty",
+      "source_roots": []
+    }
+  ]
+}
