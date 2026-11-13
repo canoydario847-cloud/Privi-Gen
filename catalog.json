@@ -15,7 +15,8 @@
         "jose-backend",
         "gate-sdk",
         "guard-sdk"
-      ]
+      ],
+      "visibility": "public"
     },
     {
       "name": "Privi",
@@ -24,7 +25,8 @@
       "status": "source",
       "source_roots": [
         "agent-gateway"
-      ]
+      ],
+      "visibility": "private"
     },
     {
       "name": "Privi-Chain",
@@ -33,7 +35,8 @@
       "status": "source",
       "source_roots": [
         "BlockChain.jsx"
-      ]
+      ],
+      "visibility": "public"
     },
     {
       "name": "Privi-Chainflow",
@@ -42,7 +45,8 @@
       "status": "source",
       "source_roots": [
         "privichain-source-2026-10-01.zip"
-      ]
+      ],
+      "visibility": "private"
     },
     {
       "name": "Privi-Boot-code",
@@ -51,7 +55,8 @@
       "status": "source",
       "source_roots": [
         "README.md"
-      ]
+      ],
+      "visibility": "public"
     },
     {
       "name": "Privi-DAO",
@@ -60,14 +65,16 @@
       "status": "source",
       "source_roots": [
         "README.md"
-      ]
+      ],
+      "visibility": "public"
     },
     {
       "name": "Privi-DAO1",
       "branch": "main",
       "component": "dao-project-empty",
       "status": "empty",
-      "source_roots": []
+      "source_roots": [],
+      "visibility": "public"
     }
   ]
 }
