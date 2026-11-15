@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import http.client
 import json
 import os
 from pathlib import Path
@@ -76,7 +77,7 @@ def request_check(payload: dict, key: str) -> dict:
         return json.loads(raw)
     except urllib.error.HTTPError as exc:
         raise GuardError(f'Guard HTTP {exc.code}; access/payment or service failure; no retry made') from None
-    except (urllib.error.URLError, TimeoutError, ValueError):
+    except (OSError, http.client.HTTPException, ValueError):
         raise GuardError('Guard response unavailable or invalid; check usage before retrying') from None
 
 

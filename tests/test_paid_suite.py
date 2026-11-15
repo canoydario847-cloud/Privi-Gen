@@ -312,4 +312,54 @@ class AdditionalBoundaries(unittest.TestCase):
         self.assertNotIn('SECRET_INPUT_DO_NOT_ECHO',json.dumps(report))
 
 
+
+class DoubleCheckRegressionTests(unittest.TestCase):
+    def test_oversized_integer_is_validation_error_before_charge(self):
+        for value in (10**400, -(10**400)):
+            with patch('suite.billing.charge') as charge:
+                with self.assertRaises(InputError):
+                    Runner('key',enable_paid=True,max_session_units=2).call(
+                        'privi_generation_cost',{'tokens':1,'cost_per_token':value,'budget':1})
+                charge.assert_not_called()
+
+    def test_impossible_fractions_are_rejected_before_charge(self):
+        cases=[('privi_retrieval_precision',{'relevant':20,'retrieved':10}),
+               ('privi_citation_coverage',{'supported_claims':20,'claims':10}),
+               ('privi_health_quorum',{'healthy':20,'total':10,'minimum_fraction':0.5}),
+               ('privi_trace_coverage',{'traced':20,'requests':10,'required_fraction':0.5}),
+               ('privi_error_budget',{'errors':20,'requests':10,'allowed_fraction':0.1})]
+        for name,args in cases:
+            with self.subTest(service=name), patch('suite.billing.charge') as charge:
+                with self.assertRaises(InputError):
+                    Runner('key',enable_paid=True,max_session_units=2).call(name,args)
+                charge.assert_not_called()
+
+    def test_retry_backoff_requires_two_observations(self):
+        self.assertEqual(evaluate('privi_retry_backoff',{'backoff_ms':[100],'jitter':True})['decision'],'review')
+
+    def test_partial_response_and_socket_reset_fail_closed(self):
+        import http.client
+        from unittest.mock import MagicMock
+        from privi_pr_guard import request_check
+        for failure in (http.client.IncompleteRead(b'SECRET_PARTIAL_BODY',200),ConnectionResetError('SECRET_RESET')):
+            opener=MagicMock()
+            opener.open.return_value.__enter__.return_value.read.side_effect=failure
+            with patch('privi_pr_guard.urllib.request.build_opener',return_value=opener):
+                with self.assertRaises(GuardError) as caught:
+                    request_check({'items':[]},'key')
+                self.assertNotIn('SECRET',str(caught.exception))
+            self.assertEqual(opener.open.call_count,1)
+
+    def test_partial_plan_response_fails_closed(self):
+        import http.client
+        from unittest.mock import MagicMock
+        opener=MagicMock()
+        opener.open.return_value.__enter__.return_value.read.side_effect=http.client.IncompleteRead(b'SECRET',100)
+        with patch('suite.billing.urllib.request.build_opener',return_value=opener):
+            with self.assertRaises(GuardError) as caught:
+                billing.paid_plan('key','org_test')
+            self.assertNotIn('SECRET',str(caught.exception))
+        self.assertEqual(opener.open.call_count,1)
+
+
 if __name__=='__main__': unittest.main()

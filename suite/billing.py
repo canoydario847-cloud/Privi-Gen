@@ -1,5 +1,6 @@
 """Use Privi Guard prepaid credits; no new wallet, ledger, or mock paid mode."""
 import hashlib
+import http.client
 import json
 from datetime import datetime, timezone
 import urllib.error
@@ -40,7 +41,7 @@ def paid_plan(key, expected_org):
             expires=datetime.fromisoformat(plan['paid_until'].replace('Z','+00:00'))
             if expires.tzinfo is None or expires<=datetime.now(timezone.utc): raise ValueError
         return {'plan':plan['plan'],'paid_until':plan.get('paid_until')}
-    except (urllib.error.URLError,TimeoutError,ValueError,KeyError,TypeError,StopIteration,AttributeError):
+    except (OSError,http.client.HTTPException,ValueError,KeyError,TypeError,StopIteration,AttributeError):
         raise GuardError('Included checks require a verified active paid plan; free allowance does not unlock this service') from None
 
 

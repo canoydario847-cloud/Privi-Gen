@@ -66,8 +66,9 @@ def valid_type(value, kind):
     if kind in ('int','positive_int'):
         return type(value) is int and (1 if kind == 'positive_int' else 0) <= value <= 10**12
     if kind in ('number','positive_number','percent','unit'):
-        return (type(value) in (int,float) and math.isfinite(value)
+        return (type(value) in (int,float)
                 and 0 <= value <= {'percent':100,'unit':1}.get(kind,10**12)
+                and math.isfinite(value)
                 and (kind != 'positive_number' or value > 0))
     if kind in ('string','sha','digest'):
         if not isinstance(value,str) or not 1 <= len(value) <= 512:
@@ -94,6 +95,10 @@ def validate(name, arguments):
     for key, kind in spec['fields'].items():
         if not valid_type(arguments[key],kind):
             raise InputError(f'Invalid field: {key}; expected {kind}')
+    for field, operation, target, _ in spec['rules']:
+        if operation in ('ratio_ge', 'ratio_ge_field', 'ratio_le_field'):
+            if arguments[field] > arguments[target[0]]:
+                raise InputError(f'Invalid fraction: {field} exceeds {target[0]}')
     if len(canonical(arguments).encode()) > MAX_INPUT_BYTES:
         raise InputError('Input exceeds 64,000 bytes')
     return spec
@@ -136,7 +141,7 @@ def measure(data, rule):
     if op == 'p95_le':
         p95 = sorted(v)[math.ceil(len(v)*0.95)-1]
         return p95 <= data[target], p95
-    if op == 'increasing': return all(a<b for a,b in zip(v,v[1:])), None
+    if op == 'increasing': return len(v) >= 2 and all(a<b for a,b in zip(v,v[1:])), None
     if op == 'max_share_le':
         total = sum(v)
         if total == 0: return False, None

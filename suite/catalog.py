@@ -10,7 +10,7 @@ def add(domain, slug, title, fields, rules, good, bad):
     assert name not in CATALOG
     CATALOG[name] = dict(name=name, domain=domain, title='Privi ' + title,
                          fields=fields, rules=rules, example=good, failing_example=bad,
-                         credit_units=2, version='1.0.0')
+                         credit_units=2, version='1.0.1')
 
 
 # GitHub: 35 independent policy services.

@@ -7,7 +7,7 @@
       "name": "privi_branch_gate",
       "title": "Privi Branch Gate",
       "domain": "github",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -56,13 +56,13 @@
           }
         }
       },
-      "policy_sha256": "09abe788e74bc45a66ae408ce8a6fe1ddd086a6d2330e2e9269b6772a87db1e8"
+      "policy_sha256": "f87a4d4b67c5b94b039b8ef3e52e27c564b6eeae99b21f85ef165eb0e060cb77"
     },
     {
       "name": "privi_diff_scope",
       "title": "Privi Diff Scope",
       "domain": "github",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -102,13 +102,13 @@
           }
         }
       },
-      "policy_sha256": "b1d323d031b83991d964741e25b14ecddfa1f0cc5b35a71932013e61ee3cf2f2"
+      "policy_sha256": "a8501209d8621b634f97e40898a34792349583b7bdd187e789f56d80adefbfb5"
     },
     {
       "name": "privi_review_binding",
       "title": "Privi Review Binding",
       "domain": "github",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -151,13 +151,13 @@
           }
         }
       },
-      "policy_sha256": "64b22a5656f8d9a3c2b992c8a1446bbf4f1e34863f6d6ebb939db03ed6e5a7cc"
+      "policy_sha256": "c3df0407adbc0aa7ba792cf22cc8ef5eff4083592c77d70f79d5493048a2171c"
     },
     {
       "name": "privi_ci_completion",
       "title": "Privi CI Completion",
       "domain": "github",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -218,13 +218,13 @@
           }
         }
       },
-      "policy_sha256": "16c5e7ca6276a1b9dbca2ddfb2dc53a66d87259e50615a361d38233569e2b44a"
+      "policy_sha256": "1ea4ceab7a4d8cc6f94c6d5928c18b1fc7db17b0a25a6ae8fb531854f56e96c5"
     },
     {
       "name": "privi_action_pins",
       "title": "Privi Action Pins",
       "domain": "github",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -257,13 +257,13 @@
           }
         }
       },
-      "policy_sha256": "f721450bb214b48b4d80bf9eb3a979435f3ad518687d3dee7011e99271df046c"
+      "policy_sha256": "cce161fab3fdd02d1e7453aad6cf69ba7cfc6c51d937bdd7299a5853c28aca1a"
     },
     {
       "name": "privi_workflow_permissions",
       "title": "Privi Workflow Permissions",
       "domain": "github",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -322,13 +322,13 @@
           }
         }
       },
-      "policy_sha256": "945e396da12022a5cfccc534739bbf699f8617394753641809b5fd900b8b9b1e"
+      "policy_sha256": "f5a1b175e71ace3bbeebe5f6aec785ec24c37b54040f609ad2978172a26aca3a"
     },
     {
       "name": "privi_fork_secret_gate",
       "title": "Privi Fork Secret Gate",
       "domain": "github",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -369,13 +369,13 @@
           }
         }
       },
-      "policy_sha256": "a3e334af16a2a03a4c083f6a5cd5778128ae4dec84f49d596b2a5bf59df865aa"
+      "policy_sha256": "3bd1ae502dceb27c9e9b06c5d13a41ffd985f9a452431bb50667d7e93a5c10a6"
     },
     {
       "name": "privi_merge_queue",
       "title": "Privi Merge Queue Fit",
       "domain": "github",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -422,13 +422,13 @@
           }
         }
       },
-      "policy_sha256": "c5af726ef84185b8188b728ca80e82c041213a72fc0f4a543a2079463e567506"
+      "policy_sha256": "47ff7385ee2e127e043d7a9cf98b4097eb57655ee96e60ed201707894a1252f5"
     },
     {
       "name": "privi_release_provenance",
       "title": "Privi Release Provenance",
       "domain": "github",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -471,13 +471,13 @@
           }
         }
       },
-      "policy_sha256": "83f3853044c2404f5e52ec42ca13cf294bcb0d270bcae88fbc8e87de25158ed0"
+      "policy_sha256": "c81042d2d9596eb10899801418d9c5116de1b2187fac2a1779bbf154692ab405"
     },
     {
       "name": "privi_dependency_delta",
       "title": "Privi Dependency Delta",
       "domain": "github",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -528,13 +528,13 @@
           }
         }
       },
-      "policy_sha256": "fd1324442b107792f7f8c37b398b3665172557b381a7e833428a02329ff90555"
+      "policy_sha256": "b574634a7e9fb449b391de7c38f6970b5c0f2eb3538a870dc9f60727aa8cd7a2"
     },
     {
       "name": "privi_license_allowlist",
       "title": "Privi License Allowlist",
       "domain": "github",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -581,13 +581,13 @@
           }
         }
       },
-      "policy_sha256": "1cf0caa614ecd39fd9f142e8e91807489f4c1398f8caccdb4d4093cbdaa12b3a"
+      "policy_sha256": "f21e32466f5d2f3ae528fcc619d86573ccde7fcf136c9f0dca85fbf4c4de2772"
     },
     {
       "name": "privi_vulnerability_gate",
       "title": "Privi Vulnerability Gate",
       "domain": "github",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -640,13 +640,13 @@
           }
         }
       },
-      "policy_sha256": "672b304fc9ad60f8404400166a2b47d96c3cc274d978030601d9a55db06bf0ff"
+      "policy_sha256": "83c721bdb4f082bf5d1df2d2d1748d8634e5c761af1f56cca060eb7d21fdf58e"
     },
     {
       "name": "privi_coverage_delta",
       "title": "Privi Coverage Delta",
       "domain": "github",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -693,13 +693,13 @@
           }
         }
       },
-      "policy_sha256": "c9c448e083a8078fe35820019122fd33dd7aa5832928c3d595e8e6c009268079"
+      "policy_sha256": "7df4a7ba869464d56ffbe69a7b9e734ba646a7e0274c8393ec6f1ffcca5cfbf0"
     },
     {
       "name": "privi_flaky_test_budget",
       "title": "Privi Flaky Test Budget",
       "domain": "github",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -736,13 +736,13 @@
           }
         }
       },
-      "policy_sha256": "6cfb32e6ea990e7b6096a17b8d36b167e9af85b6ec05f39141400db11a3e1f13"
+      "policy_sha256": "b27797240c1b067ad21e981a4cea72841629bb90ea287f9b55e4a7ed528d6450"
     },
     {
       "name": "privi_artifact_retention",
       "title": "Privi Artifact Retention",
       "domain": "github",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -780,13 +780,13 @@
           }
         }
       },
-      "policy_sha256": "e478d2931bbcd48e77343d4bd62943b09873b7f575bc14020f195f0d70963b86"
+      "policy_sha256": "7949bf1a60158c1a9e406c787a33232fbdf3653c038a2eb99e088f238e201263"
     },
     {
       "name": "privi_cache_isolation",
       "title": "Privi Cache Isolation",
       "domain": "github",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -833,13 +833,13 @@
           }
         }
       },
-      "policy_sha256": "76245bd10793bd98487d153243c08e4099bf1984970423be841206ac3b903d0a"
+      "policy_sha256": "ec6cd350a057f523ba7bf5db2d1ff39256de7f143f41c4a8655a5280467890da"
     },
     {
       "name": "privi_deploy_environment",
       "title": "Privi Deploy Environment Gate",
       "domain": "github",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -888,13 +888,13 @@
           }
         }
       },
-      "policy_sha256": "514869e43b8b1660c63882b8820e65ae0925e5e96e844443201491e39fd40132"
+      "policy_sha256": "67f46109f4c3da58f93e315cf5762f067f0231ba507ad4304364e5c6cf48d707"
     },
     {
       "name": "privi_rollback_readiness",
       "title": "Privi Rollback Readiness",
       "domain": "github",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -943,13 +943,13 @@
           }
         }
       },
-      "policy_sha256": "462136f5a82eedf370bec06296202d338c259cae8228f95530ac7159baebebcc"
+      "policy_sha256": "389f46e3aa347557abfedcded04cb5f43b8dc70a471a7a866fff503a6f9654c4"
     },
     {
       "name": "privi_migration_lock",
       "title": "Privi Migration Lock Budget",
       "domain": "github",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -994,13 +994,13 @@
           }
         }
       },
-      "policy_sha256": "41a2cf984a379915875a3bb674a062f1fb1f46baa0cb53c2a42bac51a34a9cd2"
+      "policy_sha256": "05783689cde39d669c6939f92c35822992bbc82b8f2243a224391118b0cb792d"
     },
     {
       "name": "privi_api_breaking_change",
       "title": "Privi API Compatibility Gate",
       "domain": "github",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -1045,13 +1045,13 @@
           }
         }
       },
-      "policy_sha256": "3a0d263554653a83ce4804a2d018fec9963f61f919ced4ce1616b66c6490cba9"
+      "policy_sha256": "0e386b3cb2cd4cee573e75cd7f40bd60e460b85609dd9a9937e9679edf9628e4"
     },
     {
       "name": "privi_changelog_gate",
       "title": "Privi Changelog Gate",
       "domain": "github",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -1097,13 +1097,13 @@
           }
         }
       },
-      "policy_sha256": "7c3d46970546ca37faf185d176ff2ece4d2007a8a470097af68eb9998e084a9b"
+      "policy_sha256": "ebb76b934702547c5552f66f6254c34142492b0c5ffc46949595bfd0de42e680"
     },
     {
       "name": "privi_codeowner_coverage",
       "title": "Privi Codeowner Coverage",
       "domain": "github",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -1149,13 +1149,13 @@
           }
         }
       },
-      "policy_sha256": "7db3db18a7beb58de3068b6c5075a2590926a89f5e93567c0f67b21078622f01"
+      "policy_sha256": "bc57070f364c5216df0afdde18b5ff1d4d7e1f78d33c05e34d689afc382a6496"
     },
     {
       "name": "privi_stale_branch",
       "title": "Privi Stale Branch Gate",
       "domain": "github",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -1195,13 +1195,13 @@
           }
         }
       },
-      "policy_sha256": "fb1c53cc760f0626b2cd26a525ef89af5fed524cc518413a739e93512ac285af"
+      "policy_sha256": "6c00007c9546f948626cbf522265badc4e65f3165b7344cb99457e256e86bfb7"
     },
     {
       "name": "privi_commit_identity",
       "title": "Privi Commit Identity Gate",
       "domain": "github",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -1246,13 +1246,13 @@
           }
         }
       },
-      "policy_sha256": "3edff956a3ec44c340ac5c3e926e2763292c41d2c7f2a10bdd26ac855f77f9a8"
+      "policy_sha256": "99a77b89609e74a405f624973ad2b17ab167082827bebef83a720aaadfefbc5f"
     },
     {
       "name": "privi_git_lfs_budget",
       "title": "Privi LFS Budget",
       "domain": "github",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -1297,13 +1297,13 @@
           }
         }
       },
-      "policy_sha256": "2bd4179e850d2eebfa4dc744fd73f9b73ed7415cc72eb034d08a86e1fbb6669b"
+      "policy_sha256": "20195b3566179bff6dafc958f201e248a9443ef5c15b2f8defa4a16b4bc9708f"
     },
     {
       "name": "privi_issue_acceptance",
       "title": "Privi Issue Acceptance Gate",
       "domain": "github",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -1360,13 +1360,13 @@
           }
         }
       },
-      "policy_sha256": "78420892f0f56809767d3deb91ad68fd0e37814f48551fab96065cf44794bd26"
+      "policy_sha256": "90af6c62a2d557755e24b15fde6b142d99b415d7049c01f810f528c5b1c94676"
     },
     {
       "name": "privi_test_quarantine",
       "title": "Privi Test Quarantine Expiry",
       "domain": "github",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -1413,13 +1413,13 @@
           }
         }
       },
-      "policy_sha256": "87997d427003f6e0e6f5bea39c0c123109e39401b998a88bb20a8acd9a4c5c2e"
+      "policy_sha256": "8f6c91fadf67ceba1ae2b1e73527bed30190b7593d61fac0db8d292cb7d99f7e"
     },
     {
       "name": "privi_runner_capacity",
       "title": "Privi Runner Capacity",
       "domain": "github",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -1466,13 +1466,13 @@
           }
         }
       },
-      "policy_sha256": "298e7ea459565c49b859baaa49298e6be37934f17d384210f9fda42dba2a00c9"
+      "policy_sha256": "40277e29ce658159d93e1a34cee243fdc7dcc3699e222350a06bf3e00c433950"
     },
     {
       "name": "privi_ci_cost_budget",
       "title": "Privi CI Cost Budget",
       "domain": "github",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -1516,13 +1516,13 @@
           }
         }
       },
-      "policy_sha256": "761f1e77b85ecf8466d6841fa4cb21f06f895baa4a5e926d58f6fc3f65f5ec46"
+      "policy_sha256": "537eb574b789b10193768890d4b4e48b18aede48f741e8926cef19006c096762"
     },
     {
       "name": "privi_release_freeze",
       "title": "Privi Release Freeze Gate",
       "domain": "github",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -1560,13 +1560,13 @@
           }
         }
       },
-      "policy_sha256": "4c9d105681beda0f9f19441c70969155560ad1352c62d282cd8fb928fc023de8"
+      "policy_sha256": "8f33dddeb98f2415b985875e98ab2521689d6c0defe60d0fabb16b0038afe73b"
     },
     {
       "name": "privi_webhook_delivery",
       "title": "Privi Webhook Delivery Budget",
       "domain": "github",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -1616,13 +1616,13 @@
           }
         }
       },
-      "policy_sha256": "1f52eb697d46f0cb02aee8bea23579ebc4e030b9c5e4451549f8f5dd7c2e81cc"
+      "policy_sha256": "48173e0429f56ae5083dbb509efafe2b5a066daf9579fa3972dde426f4cadb19"
     },
     {
       "name": "privi_pat_scope",
       "title": "Privi PAT Scope Gate",
       "domain": "github",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -1681,13 +1681,13 @@
           }
         }
       },
-      "policy_sha256": "146e938d211547b7c4b77e40652a4e220a1746ed784fed3afdbbb4497414aa68"
+      "policy_sha256": "28d43f72150133ef1f46b92c911cbf0746a187e9bcb835ce8963cb96dd414717"
     },
     {
       "name": "privi_package_publish",
       "title": "Privi Package Publish Gate",
       "domain": "github",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -1734,13 +1734,13 @@
           }
         }
       },
-      "policy_sha256": "54599a13cc54711efd8a6189db7837e58c7d607004fa10b24c15f1bc46dd5ac1"
+      "policy_sha256": "10199ce9239508e1c913b79f30f65399fa216bdf04b823e6ef720879f63affcc"
     },
     {
       "name": "privi_monorepo_impact",
       "title": "Privi Monorepo Impact Coverage",
       "domain": "github",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -1788,13 +1788,13 @@
           }
         }
       },
-      "policy_sha256": "3d80842b3fdab5c488fb261791e45d0085c6f8bba62bd291757ade310e27e9ad"
+      "policy_sha256": "5933539b6261239db9e3a683efe88a721913e4045acb7e35f9c61d6490c26294"
     },
     {
       "name": "privi_release_asset_integrity",
       "title": "Privi Release Asset Integrity",
       "domain": "github",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -1837,13 +1837,13 @@
           }
         }
       },
-      "policy_sha256": "d2134bd3802f9dcd105f3f367adb38963015a5c6bf9afa60fcf140aa6467c175"
+      "policy_sha256": "16e011eba3505c25e3f7eb8b0f4fb92eb5ae8863686917d30d742790bcef9e4d"
     },
     {
       "name": "privi_context_budget",
       "title": "Privi Context Budget",
       "domain": "ai",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -1887,13 +1887,13 @@
           }
         }
       },
-      "policy_sha256": "810fdbebd299a65d60f5a74203392fd0ae90fffe99ade98fc4714db2cecbf1d7"
+      "policy_sha256": "ec0f89ed10cad0cfdc153ade1725e0ed80cf6695717c9222917af8a1efc7cdf0"
     },
     {
       "name": "privi_generation_cost",
       "title": "Privi Generation Cost Cap",
       "domain": "ai",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -1937,13 +1937,13 @@
           }
         }
       },
-      "policy_sha256": "a6569f61ea282a11c98dd1c3868bdd5d0578d0fc6836ad96024a6910991120c0"
+      "policy_sha256": "86659004cab2f69ab60dd2995e606f6777f998747709baea7cc546fe667f5138"
     },
     {
       "name": "privi_tool_allowlist",
       "title": "Privi Tool Allowlist",
       "domain": "ai",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -1989,13 +1989,13 @@
           }
         }
       },
-      "policy_sha256": "87081e670204c72934b917313cf017b31f35e741cc64e78694eb24742182e87c"
+      "policy_sha256": "a4c9242c4b7d41461ead1d03c15975561ed7c77a6c7edd96f93bb6722ec06123"
     },
     {
       "name": "privi_agent_step_budget",
       "title": "Privi Agent Step Budget",
       "domain": "ai",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -2039,13 +2039,13 @@
           }
         }
       },
-      "policy_sha256": "af074115447518c99f46430d44fffe9815e6385b00607338528522f350235cd3"
+      "policy_sha256": "1b3e7aa8d02d4d874d79e5df0288f6f9ed8f1d08f58d1a37bbb394095051e8d0"
     },
     {
       "name": "privi_agent_loop",
       "title": "Privi Agent Loop Detector",
       "domain": "ai",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -2080,13 +2080,13 @@
           }
         }
       },
-      "policy_sha256": "f0b3732fc365c001205cfce41c5ffea9c54e01d1fba7457f22d3ef6f6022969a"
+      "policy_sha256": "d684e67a579bdf86d477553f525fae7befd942c59ec413dbc048a4ba81499251"
     },
     {
       "name": "privi_delegation_depth",
       "title": "Privi Delegation Depth",
       "domain": "ai",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -2133,13 +2133,13 @@
           }
         }
       },
-      "policy_sha256": "0cdcf6af719b11fd3d9947867d758034223812da10f8cfd24fcf511bb38435eb"
+      "policy_sha256": "5e731851256db6763dafe5bc4187c83ad3128fca64adb0043274bb41acd5a64a"
     },
     {
       "name": "privi_handoff_contract",
       "title": "Privi Handoff Contract",
       "domain": "ai",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -2198,13 +2198,13 @@
           }
         }
       },
-      "policy_sha256": "3fdd592d2f661387abb98f54484c14dac69fcf5c5a53192f2c9c013c13c097ba"
+      "policy_sha256": "0ba0c5f47c24b895ec809870016b1f4f9c72ed232df34e1fe7a5c641a42df51e"
     },
     {
       "name": "privi_retrieval_freshness",
       "title": "Privi Retrieval Freshness",
       "domain": "ai",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -2249,13 +2249,13 @@
           }
         }
       },
-      "policy_sha256": "19c5cf95b51d1fd69051903d6662ffc4999965cb69507054b9c67ca64ebefd96"
+      "policy_sha256": "2b7c8595d3bcb5068e7564fa539f0b8f8520e8de1e702aeb2a78e30ccf1b71b4"
     },
     {
       "name": "privi_citation_coverage",
       "title": "Privi Citation Coverage",
       "domain": "ai",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -2292,13 +2292,13 @@
           }
         }
       },
-      "policy_sha256": "cbbe34e8bd312fdf6c42273a8e2219d021fce94d6b3fc286dfed4e6c9561f44c"
+      "policy_sha256": "594ea5d97249a1757e2887e1d03ec687466e9c1a5b91728b0181eebe0beeb790"
     },
     {
       "name": "privi_retrieval_diversity",
       "title": "Privi Retrieval Diversity",
       "domain": "ai",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -2333,13 +2333,13 @@
           }
         }
       },
-      "policy_sha256": "a2eb58774f30b1f335a27f6d85be976f032e1ec1a0f66e739f5189ef1505d67f"
+      "policy_sha256": "2eba59383740b5c101489cb8bf41725aec7ca1cd404f73990940c092cd95c5b9"
     },
     {
       "name": "privi_embedding_compatibility",
       "title": "Privi Embedding Compatibility",
       "domain": "ai",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -2393,13 +2393,13 @@
           }
         }
       },
-      "policy_sha256": "8f492ae75fe0b2dfee55813be4219a86104af59a78f7275da0f9f11f421feed6"
+      "policy_sha256": "b211d401cd40d7dc75d0462c9dcc814dba978f6741e4e6e0737105a73a8a019e"
     },
     {
       "name": "privi_chunk_overlap",
       "title": "Privi Chunk Overlap Budget",
       "domain": "ai",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -2436,13 +2436,13 @@
           }
         }
       },
-      "policy_sha256": "fab1cef2ce471c2ab5d170590bd117f7d2f73040d42c3641b7302916338187bc"
+      "policy_sha256": "bd10b208059be0f110157e10d74e4284ef71b5124bcb723f30726bfdecebd5ef"
     },
     {
       "name": "privi_prompt_version",
       "title": "Privi Prompt Version Binding",
       "domain": "ai",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -2485,13 +2485,13 @@
           }
         }
       },
-      "policy_sha256": "3a9fec10617fb53359a68b7f325f45ee14dd09e97ff950137a7fb803afe4677e"
+      "policy_sha256": "1e23768642e239393381d80983120b30cea0b379feb167a3cebd620960e36545"
     },
     {
       "name": "privi_output_contract",
       "title": "Privi Output Contract Coverage",
       "domain": "ai",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -2548,13 +2548,13 @@
           }
         }
       },
-      "policy_sha256": "005909e36a09649882e69a16e557ac42b58dc9e3fba49b25a095033c58ae3afc"
+      "policy_sha256": "df8770c594e750e0e7b474ebe045e352255b96d55387bd470089f7788c3a5ead"
     },
     {
       "name": "privi_human_approval",
       "title": "Privi Human Approval Gate",
       "domain": "ai",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -2595,13 +2595,13 @@
           }
         }
       },
-      "policy_sha256": "46457344c3de453599d78927f07b58d4bd15ac0dfcc98e3d74827d622635c26c"
+      "policy_sha256": "6214006d0abd1c84c83ab10be9b37829bdab704a16988a6a1e4e209b433f91f5"
     },
     {
       "name": "privi_memory_retention",
       "title": "Privi Memory Retention",
       "domain": "ai",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -2646,13 +2646,13 @@
           }
         }
       },
-      "policy_sha256": "866a852796b04810e362c061f19e2b93ab9ff2aa25784a5d27f27d501187adc2"
+      "policy_sha256": "9b98b5c7d915c0895f8783c4ca6437dc1eba6729309c2a201435fe1973a77846"
     },
     {
       "name": "privi_tenant_isolation",
       "title": "Privi Tenant Isolation",
       "domain": "ai",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -2697,13 +2697,13 @@
           }
         }
       },
-      "policy_sha256": "6581eb216b8e0cb96109a544955337e5783304013892f428984492fa9e77ff0e"
+      "policy_sha256": "d97a983f686751b369ee307724fd9bdb53ce2685fb4c7acf85a665ef8f2c58a5"
     },
     {
       "name": "privi_pii_export",
       "title": "Privi PII Export Gate",
       "domain": "ai",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -2741,13 +2741,13 @@
           }
         }
       },
-      "policy_sha256": "585f50cd14921f5d7c7fdda7c8c1987802a4a871670b5d51c6fe3d145ff11007"
+      "policy_sha256": "214e74de1b56b797ea27a558f1f98cbcb054bec09f798efbcd50bbf774c1dddd"
     },
     {
       "name": "privi_eval_regression",
       "title": "Privi Eval Regression",
       "domain": "ai",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -2781,13 +2781,13 @@
           }
         }
       },
-      "policy_sha256": "389ae76b065fa0ff226d56cbba835dc738f49137e7f3fd9784cb1ea0d26ed4bb"
+      "policy_sha256": "8421658883e99c72332e7849545c5988417f9144501ce18fcc276175db58d09c"
     },
     {
       "name": "privi_hallucination_budget",
       "title": "Privi Unsupported Answer Budget",
       "domain": "ai",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -2824,13 +2824,13 @@
           }
         }
       },
-      "policy_sha256": "446e7bffa51f927977e31b25684400efc04f15b1a6e1797ab7286885cfa04266"
+      "policy_sha256": "0cf09176d868f15195515851f67360666ac18e0483f06ce2ad249c21b4d42ac4"
     },
     {
       "name": "privi_refusal_regression",
       "title": "Privi Refusal Regression",
       "domain": "ai",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -2880,13 +2880,13 @@
           }
         }
       },
-      "policy_sha256": "d78537ac636113c6f6265b3d98d629f77929970f5681a9b58c5559a5400c626f"
+      "policy_sha256": "6984ef86c9ad296f187e2466658f1270a2eb7f14d26995572a387415db58b577"
     },
     {
       "name": "privi_model_latency",
       "title": "Privi Model Latency SLO",
       "domain": "ai",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -2929,13 +2929,13 @@
           }
         }
       },
-      "policy_sha256": "9019226ee2feee8da7240f644548245fb4253996e340cd84cf6f3469446bb665"
+      "policy_sha256": "6bbc40481b1aac7714fb405944b4ab929be902aae27ccec3b3683c296fc9118e"
     },
     {
       "name": "privi_fallback_coverage",
       "title": "Privi Fallback Coverage",
       "domain": "ai",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -2976,13 +2976,13 @@
           }
         }
       },
-      "policy_sha256": "06f7afb8b897fc2cf5a49d8873adb7e1fc0e383e562a55f4b09cf0c9f69a6ead"
+      "policy_sha256": "4ab299a2c0e01586389c5501c07d8e090c3131cb175aff0fe4fa4afd5d8fc669"
     },
     {
       "name": "privi_model_route",
       "title": "Privi Model Route Policy",
       "domain": "ai",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -3027,13 +3027,13 @@
           }
         }
       },
-      "policy_sha256": "b5ba114a8170c616ec764e667e79576077edbb184f071aecca1939c10fe75f0c"
+      "policy_sha256": "db71942be496a42c486ff951c2a47acfddae35213f41ba8fe3055dc963722328"
     },
     {
       "name": "privi_tool_timeout",
       "title": "Privi Tool Timeout Budget",
       "domain": "ai",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -3078,13 +3078,13 @@
           }
         }
       },
-      "policy_sha256": "47af963d94bc9c2560df2f8fc8f49a72e82ff0d477b96c8c2034177f9605ddb2"
+      "policy_sha256": "69845da3416345160049fb105d6892b0f039e816de16057f66f88956f24ab1e0"
     },
     {
       "name": "privi_tool_idempotency",
       "title": "Privi Tool Idempotency Gate",
       "domain": "ai",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -3122,13 +3122,13 @@
           }
         }
       },
-      "policy_sha256": "2035ba0ab7bafc83a93038e7ab4594882cdbb60e4dfe35dbdfe35d2f137ad738"
+      "policy_sha256": "50ea16180d1a4ee1522ba93b5e5ccb76a177c1bc5ecf3427617479600550c93f"
     },
     {
       "name": "privi_sandbox_policy",
       "title": "Privi Sandbox Policy",
       "domain": "ai",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -3169,13 +3169,13 @@
           }
         }
       },
-      "policy_sha256": "ad693e95d1bbdf772fda96936a2cb18d06c4f9a2f8f2ac6bbf9d0fec39f84684"
+      "policy_sha256": "e36070a4cd94993db3d0c659d045d07a5a8b122655b0ab85029d931df537e9b1"
     },
     {
       "name": "privi_agent_identity",
       "title": "Privi Agent Identity Gate",
       "domain": "ai",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -3224,13 +3224,13 @@
           }
         }
       },
-      "policy_sha256": "c530acbb4540eb4c2b3f4fef8b4a8fe2527e4a1cd7880115bd6b861d9b379b9a"
+      "policy_sha256": "32d4b2e2870c4c2fcea241afdc4888d86a853750bccc50c16d07d36d76905304"
     },
     {
       "name": "privi_delegated_scope",
       "title": "Privi Delegated Scope Gate",
       "domain": "ai",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -3277,13 +3277,13 @@
           }
         }
       },
-      "policy_sha256": "688e7aa47cc128ae38cece9eb54b0553fdb5b8bbb1758b2ad8d35affdf00bce1"
+      "policy_sha256": "f7c70e8b210978d8bbbfe643e0c1507ad37279b185672dac7dc5948ebf28dcf9"
     },
     {
       "name": "privi_output_size",
       "title": "Privi Output Size Budget",
       "domain": "ai",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -3328,13 +3328,13 @@
           }
         }
       },
-      "policy_sha256": "525644044b65340253aa1b2e66260abc14d7ebec9172c7e0c622e657328ee1b0"
+      "policy_sha256": "675ea94cace85312175b9ce90580bc2f985291bbaef8d14886d48f05dcbfeacf"
     },
     {
       "name": "privi_embedding_drift",
       "title": "Privi Embedding Drift Budget",
       "domain": "ai",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -3381,13 +3381,13 @@
           }
         }
       },
-      "policy_sha256": "12ead74d972caa6d17d217d2aca5b6921320ff4ef1a479505671657906b08c2b"
+      "policy_sha256": "dc63c6c02241241c36fd4a12b701bfa6243eecd8246d907ecd365224e95a6292"
     },
     {
       "name": "privi_retrieval_precision",
       "title": "Privi Retrieval Precision Gate",
       "domain": "ai",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -3424,13 +3424,13 @@
           }
         }
       },
-      "policy_sha256": "0bc4ebc9661bf1874b684770a4be56ad109880e9b1fd5f2a5e5af76133ef14b1"
+      "policy_sha256": "f47fcd34e9c248a43a7d3750cc9a27e0f232dc5ab43a0181b55eba9c8af751d6"
     },
     {
       "name": "privi_eval_leakage",
       "title": "Privi Eval Dataset Leakage",
       "domain": "ai",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -3476,13 +3476,13 @@
           }
         }
       },
-      "policy_sha256": "a8305f03d96e64ed971d5ef44f062dc41ace619aa91d457f474ea836c975093d"
+      "policy_sha256": "e952010f93d0be3f28f3ab18df3b2cbe51d1353cfc2886746cb1ed24ec568852"
     },
     {
       "name": "privi_agent_concurrency",
       "title": "Privi Agent Concurrency Budget",
       "domain": "ai",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -3526,13 +3526,13 @@
           }
         }
       },
-      "policy_sha256": "32bef0184ddcf19227cf78e669a0ed2ac77cd186d337dd4385260135fa425b35"
+      "policy_sha256": "7ce62cbb9784178f24e8c675cf3f16c0a0b2a74cc7e1d5b077a03ec316f465f2"
     },
     {
       "name": "privi_agent_completion",
       "title": "Privi Agent Completion Evidence",
       "domain": "ai",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -3589,13 +3589,13 @@
           }
         }
       },
-      "policy_sha256": "1d87d23b48572b146a5912e96a30c6132471ab00c48e10b93fde67779f40268e"
+      "policy_sha256": "3f020a22ec991884128e0e7ca1ef90fe0a2737abd1637d3cc5fef73bd1e250f3"
     },
     {
       "name": "privi_latency_slo",
       "title": "Privi Call Latency SLO",
       "domain": "calls",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -3638,13 +3638,13 @@
           }
         }
       },
-      "policy_sha256": "ee3769cc3f68a8e854764e50ea6dbd7f3384e61640d57380d32c4afb478c38ef"
+      "policy_sha256": "5d919d50f3905a14f49387122399a10bf60e5d70a6c4af2ffe5d49b538391d82"
     },
     {
       "name": "privi_error_budget",
       "title": "Privi Call Error Budget",
       "domain": "calls",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -3688,13 +3688,13 @@
           }
         }
       },
-      "policy_sha256": "a0e3fa8d2e73d8ec381fba2f830e9e281aac5c3dfeb64c899548d7afe27e45d9"
+      "policy_sha256": "6b4a63ae56ff80b044ccc1ec9430eebbc3b81414f7efb90a2f8c49c8486d13aa"
     },
     {
       "name": "privi_retry_amplification",
       "title": "Privi Retry Amplification",
       "domain": "calls",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -3731,13 +3731,13 @@
           }
         }
       },
-      "policy_sha256": "d5cee8d470767a619316a5f0ac8bc7f6465a86ac6417de0bd17cc02862680fbf"
+      "policy_sha256": "948936cdf7fe1a0bbb56898e0df8714e5a2b6df4db255aea7d8811f70db43026"
     },
     {
       "name": "privi_retry_backoff",
       "title": "Privi Retry Backoff",
       "domain": "calls",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -3784,13 +3784,13 @@
           }
         }
       },
-      "policy_sha256": "f5783b3c5b8a50522bd7e262d897484eaf7824b59f7b9dcf0238d0351a1575f0"
+      "policy_sha256": "fb7829b8c1ced7ff4a6ab414639275e2822c64f11d5935b7b59ead42099212e7"
     },
     {
       "name": "privi_timeout_cascade",
       "title": "Privi Timeout Cascade",
       "domain": "calls",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -3834,13 +3834,13 @@
           }
         }
       },
-      "policy_sha256": "8472cf4ee1eba12a8888687473afce0214c5005ca124942a256802169f69cee0"
+      "policy_sha256": "08ac7296a9e8e287ddbd11236f6c22b2bad4f205fe2c6c839972a4e35bf1a694"
     },
     {
       "name": "privi_circuit_breaker",
       "title": "Privi Circuit Breaker Readiness",
       "domain": "calls",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -3891,13 +3891,13 @@
           }
         }
       },
-      "policy_sha256": "2672afe3eaae276749871f467e399899c172027b5f576bdbc68bba414f9b8a68"
+      "policy_sha256": "9ec5c36ca99c62ac957b615600118302a7ba5c329cbaf2f28e2a425425c7a54a"
     },
     {
       "name": "privi_rate_headroom",
       "title": "Privi Rate Limit Headroom",
       "domain": "calls",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -3941,13 +3941,13 @@
           }
         }
       },
-      "policy_sha256": "93f632e38d3ed17f316d5c6f4efa3270d1952d5e08f1bc475f3245091dc8bbef"
+      "policy_sha256": "706e7e73d5be78a4645032abb38baa4c555cef00ef0e929b65c55e54d9b3b5cc"
     },
     {
       "name": "privi_queue_age",
       "title": "Privi Queue Age Budget",
       "domain": "calls",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -3991,13 +3991,13 @@
           }
         }
       },
-      "policy_sha256": "403249824f09f8a0526432b870a6a99a8b26e9a156472bc94aa9da3fe8ccecbd"
+      "policy_sha256": "e1f919fedb260b943bff3899f9df94a6465b01a96529a60690b1fe092e213eaf"
     },
     {
       "name": "privi_queue_capacity",
       "title": "Privi Queue Capacity Budget",
       "domain": "calls",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -4041,13 +4041,13 @@
           }
         }
       },
-      "policy_sha256": "616abed059cfbec8ab52f578b8a6ce461312c23776f70e0d9968ea8a84ae4e0f"
+      "policy_sha256": "79ff13fabbee810afe85be3af2617a005f148707106f0e08a6b9c85369dc7ba8"
     },
     {
       "name": "privi_idempotency_window",
       "title": "Privi Idempotency Window",
       "domain": "calls",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -4092,13 +4092,13 @@
           }
         }
       },
-      "policy_sha256": "471aa8b0476eb3ad5e7ae6cf9b4ffd051118c502942585c12c6df0631640c693"
+      "policy_sha256": "b90549ad2681f468116b835c687f1ee46be6b5adf636a4c2a1c7f33b8cd142e5"
     },
     {
       "name": "privi_duplicate_delivery",
       "title": "Privi Duplicate Delivery Rate",
       "domain": "calls",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -4146,13 +4146,13 @@
           }
         }
       },
-      "policy_sha256": "2a4abb41d314c1cb1c912ae6e4f0d46a205030859f249be670b6479cfb856ead"
+      "policy_sha256": "4f6b42b53606151ab77cc7805d98a5e5cb04272f77bfceef8d955afcab1c7956"
     },
     {
       "name": "privi_webhook_signature",
       "title": "Privi Webhook Signature Gate",
       "domain": "calls",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -4201,13 +4201,13 @@
           }
         }
       },
-      "policy_sha256": "7c11fa2662f464a75c0722df3f5089c601e081c8273ac177d6df9b69caa11839"
+      "policy_sha256": "a3762276121b0cf6297c5572f1f7e4e32d207e1e9b3f39748a6ddc9dac943906"
     },
     {
       "name": "privi_tls_expiry",
       "title": "Privi TLS Expiry Budget",
       "domain": "calls",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -4256,13 +4256,13 @@
           }
         }
       },
-      "policy_sha256": "1d5e959f9cae8d066daa529032174877741d045ee15edf75327a4175bea59d66"
+      "policy_sha256": "e5dba9f9582986ee31d738a194109a1807a8ec37d3ccf3d36212cb33436c7e0b"
     },
     {
       "name": "privi_route_failover",
       "title": "Privi Route Failover Coverage",
       "domain": "calls",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -4313,13 +4313,13 @@
           }
         }
       },
-      "policy_sha256": "934102ce1d3340d29826770a4088faa3e6dd4c1a47ae098edb237d6e4f847a26"
+      "policy_sha256": "f7cf8d1bc85655d86944568a9ea2f8171b49cdc42a0a4a2c6d1c4333af1b4791"
     },
     {
       "name": "privi_region_affinity",
       "title": "Privi Region Affinity",
       "domain": "calls",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -4366,13 +4366,13 @@
           }
         }
       },
-      "policy_sha256": "a76d80589e72f5ae2040ae6362943ecd1411463242b85a734fd17d20339a46af"
+      "policy_sha256": "8835358b0cdac9fad15359f4a40154de43282a8dd97575f0718ab70e7c677918"
     },
     {
       "name": "privi_connection_pool",
       "title": "Privi Connection Pool Budget",
       "domain": "calls",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -4416,13 +4416,13 @@
           }
         }
       },
-      "policy_sha256": "76784dfed49b2e867d77938e1531daa64af5704009026eb4ee803ce18eadcc4b"
+      "policy_sha256": "73e92acd173cef5976e29e030a2adffa909b88e8071950e34f46171d2018b456"
     },
     {
       "name": "privi_payload_limit",
       "title": "Privi Call Payload Budget",
       "domain": "calls",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -4476,13 +4476,13 @@
           }
         }
       },
-      "policy_sha256": "27890be8ef971ff708e0070c9ebab7cd8a3605b7365e044108170700c9b2163c"
+      "policy_sha256": "c1aaf1b49c108714f7d4503e65b4c42e2c4dcdb6106e41a52472d06901f3f501"
     },
     {
       "name": "privi_pagination_completeness",
       "title": "Privi Pagination Completeness",
       "domain": "calls",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -4527,13 +4527,13 @@
           }
         }
       },
-      "policy_sha256": "b113874bbb974b3264a2c9eddec547d6f67c0e6dd226d9e2d097876d6298b095"
+      "policy_sha256": "0030ad4a9c933e1da5143245d57b33ef0aa3265a3d1c7ee6a8ef156b2d3533e4"
     },
     {
       "name": "privi_stream_resume",
       "title": "Privi Stream Resume Readiness",
       "domain": "calls",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -4580,13 +4580,13 @@
           }
         }
       },
-      "policy_sha256": "d94ea22847ac704512dbe1c5b4ad4786737bd43a2493f16af5f2524387126834"
+      "policy_sha256": "9e01ab60be73cc5bd01e1fffe7b24b838cf63e3ee3360ac410c40b56d8c4b912"
     },
     {
       "name": "privi_backpressure",
       "title": "Privi Backpressure Readiness",
       "domain": "calls",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -4633,13 +4633,13 @@
           }
         }
       },
-      "policy_sha256": "7222ced7aa2fb54b1f7074bf4e644291405f323c246361e2eff552a10f540342"
+      "policy_sha256": "dca9f3255180ad1bd305bef6bf6c9af2b6a6926ca56fffc7757aec0c7bde873f"
     },
     {
       "name": "privi_fanout_budget",
       "title": "Privi Fan-out Budget",
       "domain": "calls",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -4683,13 +4683,13 @@
           }
         }
       },
-      "policy_sha256": "b5b091509d288bc30b43b3ceb35ab0a584caebceb11532944a246dec18a24d29"
+      "policy_sha256": "9e27136a95bb14456c1fa641208b14765c35c0991ef300a26ff7c59986636c15"
     },
     {
       "name": "privi_call_cost",
       "title": "Privi Call Cost Cap",
       "domain": "calls",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -4733,13 +4733,13 @@
           }
         }
       },
-      "policy_sha256": "60a1b7ee7bf35e9bfef1fc95951aa99b7afcd01b08504c6b8f545895abf7a35a"
+      "policy_sha256": "35b696c1d51e4a407908225d8fda7d870d1937baea6ae26230bed82ad355f9c4"
     },
     {
       "name": "privi_provider_concentration",
       "title": "Privi Provider Concentration",
       "domain": "calls",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -4782,13 +4782,13 @@
           }
         }
       },
-      "policy_sha256": "c86fd2fdf13377eb59040a756e8ab1969ce3dcf86dcd36f7fc78be51acb5984d"
+      "policy_sha256": "29a98e57bc5564e721fd81a8f30ef375aae732d9b4e875f7cfadc47d19e3021d"
     },
     {
       "name": "privi_health_quorum",
       "title": "Privi Health Quorum",
       "domain": "calls",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -4832,13 +4832,13 @@
           }
         }
       },
-      "policy_sha256": "c6c366eae3c625350ef30bec7da36e95b1038a5ea4d38f6cd4067c49c4a0424b"
+      "policy_sha256": "23faf6cdc45f08555d3f19bc6a40d5918f6566ddcbe3d48f539226fd8cc65666"
     },
     {
       "name": "privi_dns_ttl",
       "title": "Privi DNS Failover TTL",
       "domain": "calls",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -4872,13 +4872,13 @@
           }
         }
       },
-      "policy_sha256": "60b00f5363df9f12c50bdea0c1d2199733e9b8c3151ae31aadc675492d38452e"
+      "policy_sha256": "d13a70ed3364c041166d56b314c0db3688e44ab75fc591683c3532d7c19fbcd7"
     },
     {
       "name": "privi_trace_coverage",
       "title": "Privi Trace Coverage",
       "domain": "calls",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -4922,13 +4922,13 @@
           }
         }
       },
-      "policy_sha256": "a6891dbc6a884d0f748ddcfd8542cbb583eae4e687d40262f8d1c3f5cc188ea5"
+      "policy_sha256": "d5eb7a9024d3569641984ea07b1ccedcbf9705891e49347891d3d6d42951b9de"
     },
     {
       "name": "privi_schema_negotiation",
       "title": "Privi Call Schema Negotiation",
       "domain": "calls",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -4975,13 +4975,13 @@
           }
         }
       },
-      "policy_sha256": "b957902ad03ba55a6a33c1e9284cbda9789b649400368d47dcec75f4600fa702"
+      "policy_sha256": "32f13ae13ad18c3aa9b24ff0a0953f65cc53b4ce4f057266734fece0db509d86"
     },
     {
       "name": "privi_dead_letter",
       "title": "Privi Dead Letter Recovery",
       "domain": "calls",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -5028,13 +5028,13 @@
           }
         }
       },
-      "policy_sha256": "2a7c1bfd5e58a3d3fc9bb7655cf7341efc4573f011587b558018e22c36dc7f94"
+      "policy_sha256": "4a4a16dba24e5eeb23ae386591669d63f1826b0e09f5698858ab1c9e879aeef0"
     },
     {
       "name": "privi_clock_skew",
       "title": "Privi Clock Skew Budget",
       "domain": "calls",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -5079,13 +5079,13 @@
           }
         }
       },
-      "policy_sha256": "c26d224fe3779e2bf39256d9cb250ee78cbd9504c22518f2677a5d38c1d62f9a"
+      "policy_sha256": "c312afd277607fa837762420419936600e1eaec5f637f58c8785909a218260d1"
     },
     {
       "name": "privi_graceful_shutdown",
       "title": "Privi Graceful Shutdown Budget",
       "domain": "calls",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "credit_units": 2,
       "rules": [
         [
@@ -5130,7 +5130,7 @@
           }
         }
       },
-      "policy_sha256": "43744f244122ce269529fdd2a7d16abd5d645c2656351f75257f7d925922a1db"
+      "policy_sha256": "f290d39b4a7520b2ac620d02ab538dc5a2b5aaf81d2e5ce038ce83ba974a045e"
     }
   ]
 }

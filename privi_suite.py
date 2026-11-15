@@ -44,7 +44,7 @@ def serve(runner, stdin=None, stdout=None):
                 version = params.get('protocolVersion')
                 result = {'protocolVersion':version if version in ('2025-03-26','2025-06-18','2025-11-25') else '2025-06-18',
                           'capabilities':{'tools':{'listChanged':False}},
-                          'serverInfo':{'name':'privi-paid-suite','version':'1.0.0'},
+                          'serverInfo':{'name':'privi-paid-suite','version':'1.0.1'},
                           'instructions':'100 paid policy checks of supplied evidence. Discovery is free; execution requires prepaid Privi Guard credits or verified paid-plan allowance, and explicit session authorization.'}
                 initialized = True
             elif method=='ping':
