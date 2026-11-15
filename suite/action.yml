@@ -1,0 +1,30 @@
+name: Privi Paid Service Suite
+description: Run one of 100 paid GitHub, AI and call-network policy checks.
+author: Privi World Corp
+inputs:
+  service:
+    description: Exact privi_ service name from the catalog
+    required: true
+  input-path:
+    description: JSON file with evidence matching the service schema
+    required: true
+  authorize-paid:
+    description: Set true to authorize two paid Guard check units; default denies execution
+    default: 'false'
+runs:
+  using: composite
+  steps:
+    - name: Run paid Privi policy check
+      shell: bash
+      env:
+        PRIVI_SUITE_SCRIPT: ${{ github.action_path }}/../privi_suite.py
+        PRIVI_SERVICE: ${{ inputs.service }}
+        PRIVI_INPUT_PATH: ${{ inputs.input-path }}
+        PRIVI_AUTHORIZE: ${{ inputs.authorize-paid }}
+      run: |
+        if [[ "$PRIVI_AUTHORIZE" != "true" ]]; then
+          echo 'Paid service execution requires authorize-paid: true.' >&2
+          exit 1
+        fi
+        python3 "$PRIVI_SUITE_SCRIPT" --enable-paid --max-session-units 2 \
+          run "$PRIVI_SERVICE" --input "$PRIVI_INPUT_PATH"

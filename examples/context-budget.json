@@ -1,0 +1,5 @@
+{
+  "input_tokens": 1000,
+  "reserved_output": 1000,
+  "window": 8000
+}

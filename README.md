@@ -2,7 +2,7 @@
 
 Privi-Gen is the central **source inventory and workspace generator** for the Privi family of repositories.
 
-It **does not** deploy, mint, bridge, activate a financial mainnet, modify a running service, or replace source files in other repositories. Existing projects remain the source of truth for their runtime code.
+The workspace generator commands **do not** deploy, mint, bridge, activate a financial mainnet, modify a running service, or replace source files in other repositories. Existing projects remain the source of truth for their runtime code.
 
 ## Source registry
 
@@ -49,3 +49,13 @@ Private projects (currently Privi and Privi-Chainflow) have their own read-only 
 Use the Python CLI or the root GitHub Action. Quotes are local; submitting a check requires explicit authorization and a Guard organization key with credits or an existing allowance. The normal diff costs two Guard credit units; the client enforces a per-run limit. No payment credentials or separate ledger are added to this repository.
 
 See the [setup, billing, GitHub Action example and limitations](docs/pr-guard.md). Source is published here; live paid execution requires customer configuration.
+
+## 100 paid services for GitHub, AI agents and call networks
+
+The [Privi Paid Service Suite](docs/paid-suite.md) adds **100 implemented policy checks**: 35 GitHub, 35 AI-agent and 30 call-network services. Examples include release provenance, context budgets, tool permissions, retry amplification and call-cost limits. Each checks supplied evidence against explicit rules and returns remediation, policy/input hashes and existing Privi Guard receipt references.
+
+- [All 100 services and inputs](docs/paid-service-catalog.md)
+- [Machine-readable catalog](suite/catalog.json)
+- [CLI, GitHub Action, MCP and paid-access setup](docs/paid-suite.md)
+
+The supported dispatcher requires confirmed prepaid credit billing or a verified active paid-plan allowance; there is no unverified free report path. Catalog discovery is free. The suite is source-published, not installed as 100 new tools on the hosted ledger. Paid fulfillment has not yet been tested with a real customer account. These are original Privi implementations, with no unsupported claim that competing services cannot offer similar checks.
