@@ -41,3 +41,11 @@ Copyright © 2026 Privi World Corp. All rights reserved for original Privi-Gen m
 The [Assemble Privi source workspace](https://github.com/canoydario847-cloud/Privi-Gen/actions/workflows/assemble-privi-source.yml) GitHub workflow packages **public source only** and its commit lockfile into a downloadable GitHub Actions artifact. The workflow never collects private repository source or secrets.
 
 Private projects (currently Privi and Privi-Chainflow) have their own read-only inventory workflow inside their **private** repositories. Access to their inventory artifacts follows the private repository's GitHub permissions. Their source is not published through Privi-Gen.
+
+## Privi PR Guard — paid checks for AI-generated GitHub changes
+
+**New:** [Privi PR Guard](docs/pr-guard.md) screens Git diffs for prompt-injection and secret-leak patterns using the existing Privi Guard service. Agents receive JSON decisions and receipt IDs tied to the exact patch hash. Warnings, blocked changes and service errors stop the check.
+
+Use the Python CLI or the root GitHub Action. Quotes are local; submitting a check requires explicit authorization and a Guard organization key with credits or an existing allowance. The normal diff costs two Guard credit units; the client enforces a per-run limit. No payment credentials or separate ledger are added to this repository.
+
+See the [setup, billing, GitHub Action example and limitations](docs/pr-guard.md). Source is published here; live paid execution requires customer configuration.

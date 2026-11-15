@@ -1,0 +1,45 @@
+name: Privi PR Guard
+description: Screen a Git patch for prompt injection and leaked secrets using Privi Guard credits.
+author: Privi World Corp
+branding:
+  icon: shield
+  color: purple
+inputs:
+  patch-path:
+    description: UTF-8 unified Git diff file; never executed
+    required: true
+  base-sha:
+    description: Full 40-character base commit SHA used to generate the diff
+    required: true
+  head-sha:
+    description: Full 40-character head commit SHA used to generate the diff
+    required: true
+  max-credit-units:
+    description: Maximum Guard credit units for this invocation (two directions)
+    default: '2'
+  submit:
+    description: Set true to authorize transmission to Privi and credit consumption; false only quotes
+    default: 'false'
+runs:
+  using: composite
+  steps:
+    - name: Screen patch with Privi
+      shell: bash
+      env:
+        PRIVI_GUARD_SCRIPT: ${{ github.action_path }}/privi_pr_guard.py
+        PRIVI_PATCH: ${{ inputs.patch-path }}
+        PRIVI_BASE: ${{ inputs.base-sha }}
+        PRIVI_HEAD: ${{ inputs.head-sha }}
+        PRIVI_MAX_UNITS: ${{ inputs.max-credit-units }}
+        PRIVI_SUBMIT: ${{ inputs.submit }}
+      run: |
+        args=()
+        if [[ "$PRIVI_SUBMIT" == "true" ]]; then
+          args+=(--submit)
+        elif [[ "$PRIVI_SUBMIT" != "false" ]]; then
+          echo 'submit must be true or false' >&2
+          exit 1
+        fi
+        python3 "$PRIVI_GUARD_SCRIPT" --patch "$PRIVI_PATCH" \
+          --base-sha "$PRIVI_BASE" --head-sha "$PRIVI_HEAD" \
+          --max-credit-units "$PRIVI_MAX_UNITS" "${args[@]}"
