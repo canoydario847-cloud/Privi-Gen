@@ -59,3 +59,7 @@ The [Privi Paid Service Suite](docs/paid-suite.md) adds **100 implemented policy
 - [CLI, GitHub Action, MCP and paid-access setup](docs/paid-suite.md)
 
 The supported dispatcher requires confirmed prepaid credit billing or a verified active paid-plan allowance; there is no unverified free report path. Catalog discovery is free. The suite is source-published, not installed as 100 new tools on the hosted ledger. Paid fulfillment has not yet been tested with a real customer account. These are original Privi implementations, with no unsupported claim that competing services cannot offer similar checks.
+
+## Commercial source protection
+
+[Privi's licensed-view guard and watermarking checklist](protection/README.md) adds a reusable authenticated source-view helper with buyer-specific watermarking and tests. **It is not connected to live Stripe verification or deployed to other Privi services yet.** Proprietary code should remain private and server-side; paid API access is preferred to distributing source. Publicly released code and Git history cannot be made uncopyable by a website watermark.
