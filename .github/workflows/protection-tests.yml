@@ -1,0 +1,37 @@
+name: Privi paid-access protection tests
+
+on:
+  push:
+    paths:
+      - 'protection/**'
+      - 'tests/test_licensed_view.py'
+      - 'tests/test_stripe_entitlements.py'
+      - 'tests/test_entitlement_store.py'
+      - '.github/workflows/protection-tests.yml'
+  pull_request:
+    paths:
+      - 'protection/**'
+      - 'tests/test_licensed_view.py'
+      - 'tests/test_stripe_entitlements.py'
+      - 'tests/test_entitlement_store.py'
+      - '.github/workflows/protection-tests.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  unit-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Licensed-code view authorization and watermark tests
+        run: python -m unittest discover -s tests -p 'test_licensed_view.py' -v
+      - name: Stripe webhook authorization tests
+        run: python -m unittest discover -s tests -p 'test_stripe_entitlements.py' -v
+      - name: Checkout entitlement persistence tests
+        run: python -m unittest discover -s tests -p 'test_entitlement_store.py' -v
