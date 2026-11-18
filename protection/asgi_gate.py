@@ -8,6 +8,7 @@ Never treat this gate as a source-code DRM system.
 from __future__ import annotations
 
 import re
+from urllib.parse import unquote_to_bytes
 from collections.abc import Awaitable, Callable, Mapping
 
 ASGIApp = Callable[[dict, Callable, Callable], Awaitable[None]]
@@ -25,11 +26,18 @@ class PaidAccessGate:
     """
 
     def __init__(self, app: ASGIApp, *, protected_mounts: Mapping[str, str],
-                 authorized: Callable[[str, str], bool]):
+                 authorized: Callable[[str, str], bool],
+                 *, public_mounts: tuple[str, ...] = (), deny_unmapped: bool = False):
         if not protected_mounts:
             raise ValueError("Provide at least one protected mount")
         self.app = app
         self.authorized = authorized
+        self.deny_unmapped = deny_unmapped
+        self.public_mounts = []
+        for public in public_mounts:
+            if not public.startswith("/") or INVALID_PATH.search(public) or public == "/":
+                raise ValueError("Invalid public mount")
+            self.public_mounts.append(public.rstrip("/"))
         self.mounts = []
         for path, asset in protected_mounts.items():
             if not path.startswith("/") or path == "/" or not asset or INVALID_PATH.search(path):
@@ -50,9 +58,23 @@ class PaidAccessGate:
                      or b"%" in raw_path or b"\\" in raw_path))):
             await self._deny(send, protocol, 400, b"Invalid path")
             return
+        if raw_path is not None:
+            try:
+                if unquote_to_bytes(path) != raw_path.split(b"?", 1)[0]:
+                    await self._deny(send, protocol, 400, b"Path mismatch")
+                    return
+            except (UnicodeError, ValueError):
+                await self._deny(send, protocol, 400, b"Path mismatch")
+                return
         match = next(((mount, asset) for mount, asset in self.mounts
                       if path == mount or path.startswith(mount + "/")), None)
         if not match:
+            if self.deny_unmapped and not any(
+                path == public or path.startswith(public + "/")
+                for public in self.public_mounts
+            ):
+                await self._deny(send, protocol, 403, b"Unmapped route denied")
+                return
             await self.app(scope, receive, send)
             return
         if INVALID_PATH.search(path):
