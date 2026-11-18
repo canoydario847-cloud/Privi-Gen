@@ -59,6 +59,41 @@ class PaidAccessGateTests(unittest.TestCase):
         self.assertEqual(self.request("/premium//report", buyer="buyer1",
                                       authorized=lambda *_: True), 400)
 
+    def test_encoded_path_denied(self):
+        self.assertEqual(self.request("/premium/report", buyer="buyer1",
+                                      authorized=lambda *_: True,
+                                      raw_path=b"/premium/%2e%2e/public"), 400)
+
+    def test_websocket_premium_denied_without_purchase(self):
+        received = []
+        async def receive():
+            return {"type": "websocket.connect"}
+        async def send(message):
+            received.append(message)
+        gate = PaidAccessGate(self.app, protected_mounts={"/premium": "all_tools"},
+                              authorized=lambda *_: False)
+        asyncio.run(gate({"type": "websocket", "path": "/premium/ws",
+                          "state": {"privi_buyer_id": "buyer1"}},
+                         receive, send))
+        self.assertEqual(received, [{"type": "websocket.close", "code": 1008}])
+        self.assertEqual(self.calls, [])
+
+    def test_websocket_paid_passes(self):
+        received = []
+        async def receive():
+            return {"type": "websocket.connect"}
+        async def send(message):
+            received.append(message)
+        async def ws_app(scope, receive, send):
+            self.calls.append(scope["path"])
+            await send({"type": "websocket.accept"})
+        gate = PaidAccessGate(ws_app, protected_mounts={"/premium": "all_tools"},
+                              authorized=lambda *_: True)
+        asyncio.run(gate({"type": "websocket", "path": "/premium/ws",
+                          "state": {"privi_buyer_id": "buyer1"}},
+                         receive, send))
+        self.assertEqual(received, [{"type": "websocket.accept"}])
+
     def test_fail_closed_on_database_error(self):
         def broken(*_):
             raise RuntimeError("db unavailable")
