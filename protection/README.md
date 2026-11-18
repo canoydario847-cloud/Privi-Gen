@@ -72,3 +72,21 @@ paid_app = PaidAccessGate(
 **Critical:** This is not currently installed on Render, and an ASGI gate is not sufficient to protect raw source embedded in browser bundles or public GitHub history. Ensure every premium endpoint (including WebSocket/streaming endpoints) is protected by its own appropriate authorization controls. Public discovery should remain accessible. Test with real Stripe test-mode sessions, refund and replay events, and an account with no paid entitlements before connecting live checkout. Do not place source-viewing services or secrets in public repos.
 
 Tests: `python -m unittest discover -s tests -p 'test_asgi_gate.py' -v`. GitHub Actions runs this when configured; execution success must be verified separately.
+
+## Strict route allowlist (security hardening, November 18, 2026)
+
+The paid ASGI gate now supports `deny_unmapped=True` with explicit `public_mounts`. This is safer for a new private service than allowing all routes outside the protected premium prefixes, because a newly added developer/debug/administrative endpoint cannot silently become public.
+
+```python
+PaidAccessGate(
+    authenticated_asgi_app,
+    protected_mounts={"/premium": "all_tools", "/premium/callproof": "call_proof"},
+    public_mounts=("/health", "/mcp/discovery"),
+    deny_unmapped=True,
+    authorized=durable_entitlements.authorized,
+)
+```
+
+Only list genuinely public endpoints. In particular, a public MCP tools/list or initialize response is **not** the same as a free tools/call operation; multiplexed JSON-RPC POST routes require **per-method authorization in the MCP handler**, not just this path middleware. Do not deploy an unprotected shared `/mcp` route because discovery is public. Explicitly protect REST, WebSocket and streaming routes and any admin/debug/metrics paths. Test reverse-proxy path normalization, percent-encoding and authentication middleware order. Changing `deny_unmapped` to true in a production service requires a route inventory and integration test first; the library default remains compatible with existing deployments.
+
+This code is a reference guard and is not proof of penetration-testing or operational certification. GitHub checks and deployment status must be verified independently.
