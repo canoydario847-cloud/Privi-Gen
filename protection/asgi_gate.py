@@ -27,7 +27,7 @@ class PaidAccessGate:
 
     def __init__(self, app: ASGIApp, *, protected_mounts: Mapping[str, str],
                  authorized: Callable[[str, str], bool],
-                 *, public_mounts: tuple[str, ...] = (), deny_unmapped: bool = False):
+                 public_mounts: tuple[str, ...] = (), deny_unmapped: bool = False):
         if not protected_mounts:
             raise ValueError("Provide at least one protected mount")
         self.app = app
