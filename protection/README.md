@@ -32,3 +32,9 @@ return Response(page, headers=headers, media_type="text/html")
 Do not call this function in a public repo script with sensitive source contents. Only mount it behind authentication in an authorized service. Neither the snippet nor this repository change modifies Stripe, Render, other repos, or existing live payment/access flows.
 
 **Blockchain note:** public validator nodes and independently verifiable network protocol behavior must remain auditable; do not gate required protocol verification behind a purchase.
+
+## Stripe webhook adapter foundation (added November 18, 2026)
+
+`protection/stripe_entitlements.py` verifies Stripe's raw-body `Stripe-Signature` header and rejects expired or modified signatures, then extracts an eligible paid Checkout Session when an **allowlisted, server-verified Stripe line-item price** is provided. `tests/test_stripe_entitlements.py` contains unit tests; CI execution is not verified.
+
+**Required before enabling fulfillment:** retrieve Checkout Session and line items from the Stripe API using server credentials; validate expected price ID, amount, currency, mode and paid status; independently bind `client_reference_id` to the authenticated customer's account (do not trust it alone); persist event ID and session ID atomically to prevent duplicates; map purchased prices to individual service or $35 unlimited access; handle asynchronous checkout events, chargebacks, refunds, account revocation and webhook retries. Never log full payment payloads or secrets. No production webhook endpoint has been modified by this foundation.
