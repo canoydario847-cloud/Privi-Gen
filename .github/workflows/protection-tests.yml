@@ -7,6 +7,7 @@ on:
       - 'tests/test_licensed_view.py'
       - 'tests/test_stripe_entitlements.py'
       - 'tests/test_entitlement_store.py'
+      - 'tests/test_asgi_gate.py'
       - '.github/workflows/protection-tests.yml'
   pull_request:
     paths:
@@ -14,6 +15,7 @@ on:
       - 'tests/test_licensed_view.py'
       - 'tests/test_stripe_entitlements.py'
       - 'tests/test_entitlement_store.py'
+      - 'tests/test_asgi_gate.py'
       - '.github/workflows/protection-tests.yml'
   workflow_dispatch:
 
@@ -35,3 +37,5 @@ jobs:
         run: python -m unittest discover -s tests -p 'test_stripe_entitlements.py' -v
       - name: Checkout entitlement persistence tests
         run: python -m unittest discover -s tests -p 'test_entitlement_store.py' -v
+      - name: Premium API access guard tests
+        run: python -m unittest discover -s tests -p 'test_asgi_gate.py' -v
