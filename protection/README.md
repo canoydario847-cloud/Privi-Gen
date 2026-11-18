@@ -38,3 +38,12 @@ Do not call this function in a public repo script with sensitive source contents
 `protection/stripe_entitlements.py` verifies Stripe's raw-body `Stripe-Signature` header and rejects expired or modified signatures, then extracts an eligible paid Checkout Session when an **allowlisted, server-verified Stripe line-item price** is provided. `tests/test_stripe_entitlements.py` contains unit tests; CI execution is not verified.
 
 **Required before enabling fulfillment:** retrieve Checkout Session and line items from the Stripe API using server credentials; validate expected price ID, amount, currency, mode and paid status; independently bind `client_reference_id` to the authenticated customer's account (do not trust it alone); persist event ID and session ID atomically to prevent duplicates; map purchased prices to individual service or $35 unlimited access; handle asynchronous checkout events, chargebacks, refunds, account revocation and webhook retries. Never log full payment payloads or secrets. No production webhook endpoint has been modified by this foundation.
+
+
+## Entitlement storage reference (November 18, 2026)
+
+`protection/entitlement_store.py` provides a local SQLite reference: atomic per-Checkout-Session grants, replay conflict rejection, scoped single-service purchases, $35 all-services scope, and explicit session revocation. It is **not a production database**. Deploy with a durable, shared PostgreSQL implementation and ensure refund/dispute events and administrator revocations are verified before changing records. Tests live at `tests/test_entitlement_store.py`.
+
+The hardened `extract_paid_checkout` now requires two **separately retrieved, authoritative Stripe API objects**: `verified_session` and `verified_line_items`. A webhook's hidden/custom `_server_verified_price_id` or browser parameter is never trusted. Configure the allowlist of Stripe price IDs and exact charge totals from the actual Stripe account. Do not guess price IDs from checkout link URLs.
+
+**No live deployment or customer unlock is claimed.** Before launch: (a) authenticate the buyer when creating Checkout, (b) persist their account-bound session ID, (c) verify webhook and retrieve Stripe objects, (d) confirm the session belongs to that account, (e) process grants idempotently in a shared database, (f) wire every protected tool endpoint to that database, (g) test payment, replay, refund and chargeback flows, and (h) verify no proprietary source code leaks through public repos or static bundles.
