@@ -38,13 +38,17 @@ class PaidAccessGate:
         self.mounts.sort(key=lambda pair: len(pair[0]), reverse=True)
 
     async def __call__(self, scope: dict, receive: Callable, send: Callable):
-        if scope.get("type") != "http":
-            # Not a WebSocket guard; do not mount premium WS routes here.
+        protocol = scope.get("type")
+        if protocol not in ("http", "websocket"):
             await self.app(scope, receive, send)
             return
         path = scope.get("path", "")
-        if not isinstance(path, str):
-            await self._reply(send, 400, b"Invalid path")
+        raw_path = scope.get("raw_path")
+        if (not isinstance(path, str)
+                or (raw_path is not None and
+                    (not isinstance(raw_path, bytes)
+                     or b"%" in raw_path or b"\\" in raw_path))):
+            await self._deny(send, protocol, 400, b"Invalid path")
             return
         match = next(((mount, asset) for mount, asset in self.mounts
                       if path == mount or path.startswith(mount + "/")), None)
@@ -52,22 +56,30 @@ class PaidAccessGate:
             await self.app(scope, receive, send)
             return
         if INVALID_PATH.search(path):
-            await self._reply(send, 400, b"Invalid path")
+            await self._deny(send, protocol, 400, b"Invalid path")
             return
         state = scope.get("state")
         buyer_id = state.get("privi_buyer_id") if isinstance(state, dict) else None
         if not isinstance(buyer_id, str) or not buyer_id.strip():
-            await self._reply(send, 401, b"Authentication required")
+            await self._deny(send, protocol, 401, b"Authentication required")
             return
         try:
             allowed = self.authorized(buyer_id, match[1])
         except Exception:
-            await self._reply(send, 503, b"Entitlement verification unavailable")
+            await self._deny(send, protocol, 503, b"Entitlement verification unavailable")
             return
         if allowed is not True:
-            await self._reply(send, 403, b"Verified Privi purchase required")
+            await self._deny(send, protocol, 403, b"Verified Privi purchase required")
             return
         await self.app(scope, receive, send)
+
+    @staticmethod
+    async def _deny(send: Callable, protocol: str, status: int, body: bytes):
+        if protocol == "websocket":
+            # Deny during handshake, before sending websocket.accept.
+            await send({"type": "websocket.close", "code": 1008})
+        else:
+            await PaidAccessGate._reply(send, status, body)
 
     @staticmethod
     async def _reply(send: Callable, status: int, body: bytes):
