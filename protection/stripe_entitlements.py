@@ -59,36 +59,66 @@ def verify_stripe_signature(payload: bytes, signature: str, secret: str,
     return event
 
 
-def extract_paid_checkout(event: Mapping, known_prices: Mapping[str, str]) -> PaidCheckout | None:
-    """Return verified paid checkout metadata only for an allowlisted price.
+def extract_paid_checkout(
+    event: Mapping,
+    known_prices: Mapping[str, tuple[str, int, str]],
+    *,
+    verified_session: Mapping,
+    verified_line_items: list[Mapping],
+) -> PaidCheckout | None:
+    """Extract a paid purchase only from server-fetched Stripe data.
 
-    Caller must retrieve Checkout Session line items from Stripe with its
-    server credential and pass their authoritative price ID as known_prices
-    mapping context, or populate it from a trusted Stripe API retrieval.
-    Do not use browser metadata or client-provided price values.
+    `verified_session` and `verified_line_items` must be fetched directly
+    from Stripe with the backend secret key, never from the webhook JSON,
+    client request, session metadata, or frontend state. Price configurations
+    map Stripe price ID -> (scope, expected cents, ISO currency).
+    One line item with quantity=1 is supported; reject mixed carts.
+    Customer identity binding and atomic persistence are separate steps.
     """
     if event.get("type") != "checkout.session.completed":
         return None
     obj = event.get("data", {}).get("object", {})
-    if (obj.get("object") != "checkout.session"
-        or obj.get("mode") != "payment"
-        or obj.get("payment_status") != "paid"
-        or not obj.get("client_reference_id")
-        or not obj.get("customer")
-        or not obj.get("id")
-        or not isinstance(obj.get("amount_total"), int)
-        or obj.get("amount_total") < 0
-        or not isinstance(obj.get("currency"), str)):
+    if not isinstance(obj, Mapping) or not isinstance(verified_session, Mapping):
         return None
-    # A Stripe webhook checkout session does not normally include its line
-    # items. Require the integration's server-verified line-item price ID.
-    price_id = obj.get("_server_verified_price_id")
-    if not isinstance(price_id, str) or price_id not in known_prices:
+    if not isinstance(verified_line_items, list) or len(verified_line_items) != 1:
+        return None
+    item = verified_line_items[0]
+    if not isinstance(item, Mapping) or not isinstance(item.get("price"), Mapping):
+        return None
+    price_id = item["price"].get("id")
+    plan = known_prices.get(price_id) if isinstance(price_id, str) else None
+    if not plan or len(plan) != 3:
+        return None
+    _, expected_cents, expected_currency = plan
+    # Require API-fetched data to match the signed event's Checkout Session ID.
+    if (
+        obj.get("object") != "checkout.session"
+        or not isinstance(obj.get("id"), str)
+        or not obj["id"]
+        or verified_session.get("id") != obj["id"]
+        or verified_session.get("object") != "checkout.session"
+        or verified_session.get("mode") != "payment"
+        or verified_session.get("payment_status") != "paid"
+        or not isinstance(verified_session.get("client_reference_id"), str)
+        or not verified_session["client_reference_id"]
+        or not isinstance(verified_session.get("customer"), str)
+        or not verified_session["customer"]
+        or item.get("quantity") != 1
+        or type(expected_cents) is not int
+        or expected_cents <= 0
+        or type(verified_session.get("amount_total")) is not int
+        or verified_session["amount_total"] != expected_cents
+        or verified_session.get("currency", "").lower() != expected_currency.lower()
+        or item["price"].get("unit_amount") != expected_cents
+        or item["price"].get("currency", "").lower() != expected_currency.lower()
+    ):
         return None
     return PaidCheckout(
-        event_id=event["id"], session_id=obj["id"],
-        customer_id=obj["customer"],
-        client_reference_id=obj["client_reference_id"],
-        stripe_price_id=price_id, amount_total=obj["amount_total"],
-        currency=obj["currency"].lower(),
+        event_id=event["id"],
+        session_id=obj["id"],
+        customer_id=verified_session["customer"],
+        client_reference_id=verified_session["client_reference_id"],
+        stripe_price_id=price_id,
+        amount_total=expected_cents,
+        currency=expected_currency.lower(),
     )
