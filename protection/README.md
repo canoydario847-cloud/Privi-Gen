@@ -47,3 +47,28 @@ Do not call this function in a public repo script with sensitive source contents
 The hardened `extract_paid_checkout` now requires two **separately retrieved, authoritative Stripe API objects**: `verified_session` and `verified_line_items`. A webhook's hidden/custom `_server_verified_price_id` or browser parameter is never trusted. Configure the allowlist of Stripe price IDs and exact charge totals from the actual Stripe account. Do not guess price IDs from checkout link URLs.
 
 **No live deployment or customer unlock is claimed.** Before launch: (a) authenticate the buyer when creating Checkout, (b) persist their account-bound session ID, (c) verify webhook and retrieve Stripe objects, (d) confirm the session belongs to that account, (e) process grants idempotently in a shared database, (f) wire every protected tool endpoint to that database, (g) test payment, replay, refund and chargeback flows, and (h) verify no proprietary source code leaks through public repos or static bundles.
+
+
+## ASGI paid API gate (November 18, 2026)
+
+`protection/asgi_gate.py` is a framework-neutral ASGI middleware reference. It requires a trusted, authenticated `scope["state"]["privi_buyer_id"]`, checks the entitled service scope with a server-side `authorized(buyer_id, scope)` callback, and returns 401 (missing identity), 403 (not paid) or 503 (entitlement backend unavailable), without exposing protected content. Paths are protected by mount prefix; the longest configured prefix wins. Public onboarding/discovery routes must live outside these mounts.
+
+Example (illustrative only, after authenticated buyer session and a shared durable database are configured):
+
+```python
+from protection.asgi_gate import PaidAccessGate
+
+paid_app = PaidAccessGate(
+    premium_asgi_app,
+    protected_mounts={
+        "/premium": "all_tools",
+        "/premium/callproof": "call_proof",
+    },
+    authorized=production_entitlement_store.authorized,
+)
+# Install after authentication middleware, or ensure trusted state is set.
+```
+
+**Critical:** This is not currently installed on Render, and an ASGI gate is not sufficient to protect raw source embedded in browser bundles or public GitHub history. Ensure every premium endpoint (including WebSocket/streaming endpoints) is protected by its own appropriate authorization controls. Public discovery should remain accessible. Test with real Stripe test-mode sessions, refund and replay events, and an account with no paid entitlements before connecting live checkout. Do not place source-viewing services or secrets in public repos.
+
+Tests: `python -m unittest discover -s tests -p 'test_asgi_gate.py' -v`. GitHub Actions runs this when configured; execution success must be verified separately.
