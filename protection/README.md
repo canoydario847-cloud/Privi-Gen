@@ -90,3 +90,28 @@ PaidAccessGate(
 Only list genuinely public endpoints. In particular, a public MCP tools/list or initialize response is **not** the same as a free tools/call operation; multiplexed JSON-RPC POST routes require **per-method authorization in the MCP handler**, not just this path middleware. Do not deploy an unprotected shared `/mcp` route because discovery is public. Explicitly protect REST, WebSocket and streaming routes and any admin/debug/metrics paths. Test reverse-proxy path normalization, percent-encoding and authentication middleware order. Changing `deny_unmapped` to true in a production service requires a route inventory and integration test first; the library default remains compatible with existing deployments.
 
 This code is a reference guard and is not proof of penetration-testing or operational certification. GitHub checks and deployment status must be verified independently.
+
+## MCP tool-call method authorization (November 18, 2026)
+
+`protection/mcp_policy.py` adds `MCPAccessPolicy`, a fail-closed JSON-RPC authorization decision helper. It is **not yet wired into any live Privi MCP endpoint**. Invoke it on every received JSON-RPC message **before dispatch**, including every WebSocket or streaming transport message. Only the approved public discovery methods `initialize`, `notifications/initialized`, `ping`, and `tools/list` are allowed without payment. `tools/call` requires the exact tool name to be registered with a specific service entitlement, and a trusted authenticated buyer ID. Unknown methods and tools are denied; add separate protections for resources/read, prompts/get, and other execution methods before enabling those features. This deliberately disallows JSON-RPC batch messages.
+
+```python
+from protection.mcp_policy import MCPAccessPolicy
+
+policy = MCPAccessPolicy(
+    tool_scopes={
+        "privi_callproof": "call_proof",
+        "privi_guard": "guard",
+    },
+    authorized=durable_entitlements.authorized,
+)
+decision = policy.decide(parsed_json_rpc_message, buyer_id=verified_session.buyer_id)
+if not decision.allowed:
+    # Return an appropriate JSON-RPC or HTTP denial; do not dispatch the tool.
+    raise PermissionError(decision.reason)
+# Only now dispatch through the existing MCP tool registry.
+```
+
+Never accept `buyer_id`, pricing, plan, or entitlement from tool arguments or client metadata. Map every deployed paid tool into the registry before enabling method-level enforcement, and preserve public metadata separately. For the $35 one-time Pro plan, the entitlement backend must grant `all_services` access to every actual service scope without excluding any category. Never treat the tool's JSON-RPC ID as proof of customer identity.
+
+**Required deployment verification:** run unit tests, test unauthorized `tools/call` over HTTP and streaming transports, test a genuinely paid account with Stripe test purchases, test refunds and replays, and verify existing publicly documented discovery remains reachable. A committed policy file is not proof of production enforcement or invulnerability.
