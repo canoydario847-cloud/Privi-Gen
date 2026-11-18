@@ -94,6 +94,28 @@ class PaidAccessGateTests(unittest.TestCase):
                          receive, send))
         self.assertEqual(received, [{"type": "websocket.accept"}])
 
+    def test_strict_mode_denies_unknown_routes(self):
+        messages = []
+        async def receive():
+            return {"type": "http.request", "body": b""}
+        async def send(message):
+            messages.append(message)
+        gate = PaidAccessGate(
+            self.app, protected_mounts={"/premium": "all_tools"},
+            authorized=lambda *_: True, public_mounts=("/health", "/mcp/discovery"),
+            deny_unmapped=True)
+        asyncio.run(gate({"type": "http", "path": "/admin/debug", "state": {}}, receive, send))
+        self.assertEqual(messages[0]["status"], 403)
+        self.assertNotIn("/admin/debug", self.calls)
+        messages.clear()
+        asyncio.run(gate({"type": "http", "path": "/health", "state": {}}, receive, send))
+        self.assertEqual(messages[0]["status"], 200)
+
+    def test_raw_path_mismatch_rejected(self):
+        self.assertEqual(self.request("/premium/run", buyer="buyer1",
+                                      authorized=lambda *_: True,
+                                      raw_path=b"/public/run"), 400)
+
     def test_fail_closed_on_database_error(self):
         def broken(*_):
             raise RuntimeError("db unavailable")
