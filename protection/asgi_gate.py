@@ -58,6 +58,12 @@ class PaidAccessGate:
                      or b"%" in raw_path or b"\\" in raw_path))):
             await self._deny(send, protocol, 400, b"Invalid path")
             return
+        # Validate the entire request path before any public-route fallback.
+        # Otherwise /public/../premium could reach a protected endpoint if a
+        # downstream framework or reverse proxy normalizes dot segments.
+        if INVALID_PATH.search(path):
+            await self._deny(send, protocol, 400, b"Invalid path")
+            return
         if raw_path is not None:
             try:
                 if unquote_to_bytes(path) != raw_path.split(b"?", 1)[0]:
