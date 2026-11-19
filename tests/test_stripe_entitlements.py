@@ -79,6 +79,26 @@ class StripeVerificationTests(unittest.TestCase):
     def test_wrong_amount_rejected(self):
         self.assertIsNone(self.extract(session=dict(self.session, amount_total=1999)))
 
+    def test_malformed_signed_event_rejected_without_exception(self):
+        for event in (
+            None,
+            [],
+            {"type": "checkout.session.completed", "data": None},
+            {"type": "checkout.session.completed", "data": []},
+            {"type": "checkout.session.completed", "data": {"object": None}},
+        ):
+            with self.subTest(event=event):
+                self.assertIsNone(self.extract(event=event))
+
+    def test_malformed_currency_rejected_without_exception(self):
+        for currency in (None, 840, [], {}):
+            with self.subTest(currency=currency):
+                self.assertIsNone(self.extract(session=dict(self.session, currency=currency)))
+                items = [{"quantity": 1, "price": {
+                    "id": "price_pro", "unit_amount": 3500, "currency": currency
+                }}]
+                self.assertIsNone(self.extract(line_items=items))
+
     def test_mixed_cart_rejected(self):
         self.assertIsNone(self.extract(line_items=self.line_items * 2))
 
