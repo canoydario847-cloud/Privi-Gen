@@ -36,11 +36,13 @@ jobs:
               python3 privi_gen.py inventory --repo "$repo" --out "./privi-workspace/$(basename "$repo")-source-index.json"
             fi
           done
-      - name: Package source workspace (exclude Git internals)
-        run: tar -czf privi-source-workspace.tar.gz --exclude='.git' privi-workspace
-      - name: Upload reproducible source bundle
-        uses: actions/upload-artifact@v4
-        with:
-          name: privi-source-workspace
-          path: privi-source-workspace.tar.gz
-          retention-days: 7
+      # SECURITY: Do not upload a compiled multi-repository source bundle.
+      # GitHub Actions artifacts on public repositories may expose copied source
+      # to users outside the intended paid-customer delivery channel.
+      # Preserve the source inventory for this ephemeral workflow run only;
+      # distribution must use a private, access-controlled release pipeline.
+      - name: Confirm local source workspace without publishing
+        shell: bash
+        run: |
+          test -d ./privi-workspace
+          echo "Source inventory generated locally; publication disabled."
