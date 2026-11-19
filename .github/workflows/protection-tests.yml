@@ -9,6 +9,7 @@ on:
       - 'tests/test_entitlement_store.py'
       - 'tests/test_asgi_gate.py'
       - 'tests/test_mcp_policy.py'
+      - 'tests/test_paid_access_e2e.py'
       - '.github/workflows/protection-tests.yml'
   pull_request:
     paths:
@@ -18,6 +19,7 @@ on:
       - 'tests/test_entitlement_store.py'
       - 'tests/test_asgi_gate.py'
       - 'tests/test_mcp_policy.py'
+      - 'tests/test_paid_access_e2e.py'
       - '.github/workflows/protection-tests.yml'
   workflow_dispatch:
 
@@ -43,3 +45,5 @@ jobs:
         run: python -m unittest discover -s tests -p 'test_asgi_gate.py' -v
       - name: MCP paid method authorization tests
         run: python -m unittest discover -s tests -p 'test_mcp_policy.py' -v
+      - name: Synthetic paid-access end-to-end tests
+        run: python -m unittest discover -s tests -p 'test_paid_access_e2e.py' -v
