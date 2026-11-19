@@ -80,8 +80,11 @@ class StripeVerificationTests(unittest.TestCase):
         self.assertIsNone(self.extract(session=dict(self.session, amount_total=1999)))
 
     def test_malformed_signed_event_rejected_without_exception(self):
+        self.assertIsNone(extract_paid_checkout(
+            None, self.prices, verified_session=self.session,
+            verified_line_items=self.line_items,
+        ))
         for event in (
-            None,
             [],
             {"type": "checkout.session.completed", "data": None},
             {"type": "checkout.session.completed", "data": []},
