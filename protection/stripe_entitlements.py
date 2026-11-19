@@ -75,9 +75,10 @@ def extract_paid_checkout(
     One line item with quantity=1 is supported; reject mixed carts.
     Customer identity binding and atomic persistence are separate steps.
     """
-    if event.get("type") != "checkout.session.completed":
+    if not isinstance(event, Mapping) or event.get("type") != "checkout.session.completed":
         return None
-    obj = event.get("data", {}).get("object", {})
+    data = event.get("data")
+    obj = data.get("object") if isinstance(data, Mapping) else None
     if not isinstance(obj, Mapping) or not isinstance(verified_session, Mapping):
         return None
     if not isinstance(verified_line_items, list) or len(verified_line_items) != 1:
@@ -90,6 +91,12 @@ def extract_paid_checkout(
     if not plan or len(plan) != 3:
         return None
     _, expected_cents, expected_currency = plan
+    session_currency = verified_session.get("currency")
+    price_currency = item["price"].get("currency")
+    if (not isinstance(expected_currency, str)
+            or not isinstance(session_currency, str)
+            or not isinstance(price_currency, str)):
+        return None
     # Require API-fetched data to match the signed event's Checkout Session ID.
     if (
         obj.get("object") != "checkout.session"
@@ -108,9 +115,9 @@ def extract_paid_checkout(
         or expected_cents <= 0
         or type(verified_session.get("amount_total")) is not int
         or verified_session["amount_total"] != expected_cents
-        or verified_session.get("currency", "").lower() != expected_currency.lower()
+        or session_currency.lower() != expected_currency.lower()
         or item["price"].get("unit_amount") != expected_cents
-        or item["price"].get("currency", "").lower() != expected_currency.lower()
+        or price_currency.lower() != expected_currency.lower()
     ):
         return None
     return PaidCheckout(
