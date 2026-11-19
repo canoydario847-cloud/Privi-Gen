@@ -59,6 +59,23 @@ class PaidAccessGateTests(unittest.TestCase):
         self.assertEqual(self.request("/premium//report", buyer="buyer1",
                                       authorized=lambda *_: True), 400)
 
+    def test_malformed_public_path_cannot_bypass_paid_gate(self):
+        # A reverse proxy or framework might normalize these into /premium.
+        # Reject before the default public fallback forwards the request.
+        for path in (
+            "/public/../premium",
+            "/public/./premium",
+            "/public//premium",
+            "/public\\\\premium",
+            "/public/%2e%2e/premium",
+        ):
+            with self.subTest(path=path):
+                self.assertEqual(self.request(path), 400)
+        self.assertEqual(self.calls, [])
+
+    def test_public_path_stays_public(self):
+        self.assertEqual(self.request("/mcp/tools/list"), 200)
+
     def test_encoded_path_denied(self):
         self.assertEqual(self.request("/premium/report", buyer="buyer1",
                                       authorized=lambda *_: True,
