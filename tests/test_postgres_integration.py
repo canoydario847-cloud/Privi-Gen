@@ -20,7 +20,7 @@ class RealPostgresEntitlements(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.url = os.getenv("PRIVI_TEST_DATABASE_URL")
-        cls.connect = psycopg_connect_factory(cls.url)
+        cls.connect = staticmethod(psycopg_connect_factory(cls.url))
         # CI-only disposable DB; never run this test against a shared server.
         if os.getenv("PRIVI_TEST_ALLOW_SCHEMA_RESET") != "ephemeral-ci-only":
             raise RuntimeError("Explicit disposable database confirmation required")
