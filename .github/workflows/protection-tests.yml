@@ -13,6 +13,7 @@ on:
       - 'tests/test_paid_access_http_e2e.py'
       - 'tests/test_checkout_fulfillment.py'
       - 'tests/test_postgres_entitlement_store.py'
+      - 'tests/test_postgres_integration.py'
       - '.github/workflows/protection-tests.yml'
   pull_request:
     paths:
@@ -26,6 +27,7 @@ on:
       - 'tests/test_paid_access_http_e2e.py'
       - 'tests/test_checkout_fulfillment.py'
       - 'tests/test_postgres_entitlement_store.py'
+      - 'tests/test_postgres_integration.py'
       - '.github/workflows/protection-tests.yml'
   workflow_dispatch:
 
@@ -59,3 +61,35 @@ jobs:
         run: python -m unittest discover -s tests -p 'test_checkout_fulfillment.py' -v
       - name: PostgreSQL store contract tests (mock connection)
         run: python -m unittest discover -s tests -p 'test_postgres_entitlement_store.py' -v
+
+  postgres-integration:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: privi_ci
+          POSTGRES_PASSWORD: local_ci_fixture_only
+          POSTGRES_DB: privi_ci
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U privi_ci -d privi_ci"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      PRIVI_TEST_DATABASE_URL: postgresql://privi_ci:local_ci_fixture_only@localhost:5432/privi_ci
+      PRIVI_TEST_ALLOW_SCHEMA_RESET: ephemeral-ci-only
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install PostgreSQL driver
+        run: python -m pip install 'psycopg[binary]>=3.1,<4'
+      - name: Test paid access with real PostgreSQL and concurrent webhooks
+        run: python -m unittest discover -s tests -p 'test_postgres_integration.py' -v
