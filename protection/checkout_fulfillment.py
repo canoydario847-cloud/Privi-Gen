@@ -60,3 +60,43 @@ def fulfill_verified_checkout(
     if purchase.client_reference_id != checkout_buyer_id:
         raise ValueError("Checkout buyer does not match server binding")
     return store.grant(purchase, checkout_buyer_id, plan)
+
+
+def fulfill_bound_checkout(
+    *,
+    payload: bytes,
+    signature: str,
+    webhook_secret: str,
+    verified_session: Mapping,
+    verified_line_items: list[Mapping],
+    price_allowlist: Mapping[str, PricePlan],
+    store: EntitlementStore,
+    bindings,
+    clock=None,
+) -> bool:
+    """Fulfill only when an immutable server-side Checkout buyer binding exists.
+
+    A caller must fetch the session and all line items directly from Stripe
+    using its server key; this function does not trust client-supplied data.
+    Bindings must be created at Checkout creation by trusted authenticated
+    application code, not in the webhook handler.
+    """
+    if not isinstance(verified_session, Mapping):
+        return False
+    session_id = verified_session.get("id")
+    if not isinstance(session_id, str) or not session_id.strip():
+        return False
+    buyer_id = bindings.buyer_for(session_id)
+    if buyer_id is None:
+        return False
+    return fulfill_verified_checkout(
+        payload=payload,
+        signature=signature,
+        webhook_secret=webhook_secret,
+        verified_session=verified_session,
+        verified_line_items=verified_line_items,
+        checkout_buyer_id=buyer_id,
+        price_allowlist=price_allowlist,
+        store=store,
+        clock=clock,
+    )
