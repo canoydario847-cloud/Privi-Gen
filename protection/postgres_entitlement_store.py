@@ -32,6 +32,11 @@ CREATE TABLE IF NOT EXISTS privi_processed_checkouts (
 CREATE INDEX IF NOT EXISTS privi_checkouts_buyer_idx
     ON privi_processed_checkouts (buyer_id, scope)
     WHERE revoked = FALSE;
+CREATE TABLE IF NOT EXISTS privi_blocked_checkouts (
+    session_id TEXT PRIMARY KEY,
+    reason TEXT NOT NULL CHECK (reason IN ('full_refund', 'dispute')),
+    created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
 """
 
 
@@ -63,6 +68,18 @@ class PostgresEntitlementStore:
         with closing(self.connect()) as conn:
             with conn:
                 with conn.cursor() as cursor:
+                    # Serialize grant vs pre-grant verified refund/dispute.
+                    # The same transaction-scoped key is used by block_session.
+                    cursor.execute(
+                        "SELECT pg_advisory_xact_lock(hashtextextended(%s, 0))",
+                        (purchase.session_id,),
+                    )
+                    cursor.execute(
+                        "SELECT 1 FROM privi_blocked_checkouts WHERE session_id=%s",
+                        (purchase.session_id,),
+                    )
+                    if cursor.fetchone() is not None:
+                        return False
                     cursor.execute(
                         """INSERT INTO privi_processed_checkouts
                         (session_id,event_id,buyer_id,customer_id,price_id,
@@ -95,6 +112,42 @@ class PostgresEntitlementStore:
                         raise ValueError("Conflicting checkout replay or event ID")
                     # A revoked grant stays revoked, even after webhook replay.
                     return False
+
+    def block_session(self, session_id: str, reason: str) -> bool:
+        """Persist a verified pre-grant refund/dispute deny marker.
+
+        Only a trusted reconciler that verified an authoritative Stripe
+        payment or dispute may invoke this method. The block is permanent;
+        a customer reversal requires explicit audited remediation, never
+        automatic reopening from a replayed checkout webhook.
+
+        Returns True when newly blocked, False when previously blocked.
+        """
+        if not isinstance(session_id, str) or not session_id.startswith("cs_"):
+            raise ValueError("Valid Checkout session ID required")
+        if reason not in ("full_refund", "dispute"):
+            raise ValueError("Verified refund/dispute reason required")
+        with closing(self.connect()) as conn:
+            with conn:
+                with conn.cursor() as cursor:
+                    cursor.execute(
+                        "SELECT pg_advisory_xact_lock(hashtextextended(%s, 0))",
+                        (session_id,),
+                    )
+                    cursor.execute(
+                        """INSERT INTO privi_blocked_checkouts (session_id,reason)
+                           VALUES (%s,%s) ON CONFLICT DO NOTHING
+                           RETURNING session_id""",
+                        (session_id, reason),
+                    )
+                    inserted = cursor.fetchone() is not None
+                    cursor.execute(
+                        """UPDATE privi_processed_checkouts
+                           SET revoked=TRUE
+                           WHERE session_id=%s AND revoked=FALSE""",
+                        (session_id,),
+                    )
+                    return inserted
 
     def authorized(self, buyer_id: str, scope: str) -> bool:
         if not isinstance(buyer_id, str) or not buyer_id.strip() or not isinstance(scope, str) or not scope.strip():
