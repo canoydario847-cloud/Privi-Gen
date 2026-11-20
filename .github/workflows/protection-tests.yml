@@ -14,6 +14,7 @@ on:
       - 'tests/test_checkout_fulfillment.py'
       - 'tests/test_postgres_entitlement_store.py'
       - 'tests/test_postgres_integration.py'
+      - 'tests/test_checkout_bindings_integration.py'
       - '.github/workflows/protection-tests.yml'
   pull_request:
     paths:
@@ -28,6 +29,7 @@ on:
       - 'tests/test_checkout_fulfillment.py'
       - 'tests/test_postgres_entitlement_store.py'
       - 'tests/test_postgres_integration.py'
+      - 'tests/test_checkout_bindings_integration.py'
       - '.github/workflows/protection-tests.yml'
   workflow_dispatch:
 
@@ -93,3 +95,5 @@ jobs:
         run: python -m pip install 'psycopg[binary]>=3.1,<4'
       - name: Test paid access with real PostgreSQL and concurrent webhooks
         run: python -m unittest discover -s tests -p 'test_postgres_integration.py' -v
+      - name: Test immutable buyer-to-checkout bindings in PostgreSQL
+        run: python -m unittest discover -s tests -p 'test_checkout_bindings_integration.py' -v
