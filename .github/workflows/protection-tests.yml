@@ -11,6 +11,7 @@ on:
       - 'tests/test_mcp_policy.py'
       - 'tests/test_paid_access_e2e.py'
       - 'tests/test_paid_access_http_e2e.py'
+      - 'tests/test_checkout_fulfillment.py'
       - '.github/workflows/protection-tests.yml'
   pull_request:
     paths:
@@ -22,6 +23,7 @@ on:
       - 'tests/test_mcp_policy.py'
       - 'tests/test_paid_access_e2e.py'
       - 'tests/test_paid_access_http_e2e.py'
+      - 'tests/test_checkout_fulfillment.py'
       - '.github/workflows/protection-tests.yml'
   workflow_dispatch:
 
@@ -51,3 +53,5 @@ jobs:
         run: python -m unittest discover -s tests -p 'test_paid_access_e2e.py' -v
       - name: HTTP-level entitlement integration tests
         run: python -m unittest discover -s tests -p 'test_paid_access_http_e2e.py' -v
+      - name: Verify server-bound paid checkout fulfillment
+        run: python -m unittest discover -s tests -p 'test_checkout_fulfillment.py' -v
