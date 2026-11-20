@@ -30,7 +30,7 @@ class RealPostgresEntitlements(unittest.TestCase):
 
     def setUp(self):
         with self.connect() as conn:
-            conn.execute("TRUNCATE TABLE privi_processed_checkouts")
+            conn.execute("TRUNCATE TABLE privi_processed_checkouts, privi_blocked_checkouts")
 
     def test_grant_replay_revoke_and_account_isolation(self):
         p = PaidCheckout("evt_1", "cs_1", "cus_1", "buyer_1", "price_pro", 3500, "usd")

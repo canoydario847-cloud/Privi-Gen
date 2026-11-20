@@ -33,7 +33,7 @@ class BoundCheckoutEndToEndTests(unittest.TestCase):
 
     def setUp(self):
         with self.connect() as conn:
-            conn.execute("TRUNCATE TABLE privi_processed_checkouts, privi_checkout_buyers")
+            conn.execute("TRUNCATE TABLE privi_processed_checkouts, privi_checkout_buyers, privi_blocked_checkouts")
         self.secret = "whsec_disposable_fixture_only"
         self.now = 1784480000
         self.event = {
