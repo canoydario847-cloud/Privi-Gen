@@ -22,7 +22,7 @@ class ReconcilePostgresTests(unittest.TestCase):
 
     def setUp(self):
         with self.connect() as conn:
-            conn.execute("TRUNCATE TABLE privi_processed_checkouts")
+            conn.execute("TRUNCATE TABLE privi_processed_checkouts, privi_blocked_checkouts")
         self.purchase = PaidCheckout("evt_refund", "cs_refund", "cus_1", "buyer_1",
                                      "price_pro", 3500, "usd")
         self.store.grant(self.purchase, "buyer_1", PricePlan("all_services", 3500))
