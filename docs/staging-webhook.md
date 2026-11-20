@@ -22,3 +22,5 @@ session identity, Stripe test-mode API credentials with secure secret storage,
 a persistent test PostgreSQL instance, secure TLS/reverse proxy rules, and
 rate limiting. Review refund/dispute notification reconciliation separately.
 This module does not change live billing, customer permissions, or PRVI mainnet.
+
+If a *signed paid* Checkout session arrives before its trusted customer binding exists, the webhook responds with a retryable HTTP 503 rather than acknowledging it as complete. Investigate repeated 503s and reconcile payment/account state; do not bind accounts from webhook payloads.
