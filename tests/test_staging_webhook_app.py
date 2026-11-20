@@ -106,6 +106,24 @@ class WebhookStagingTests(unittest.TestCase):
                 self.assertEqual(self.call("/staging/stripe-webhook", body=body, method="POST", headers=h)[0], 400)
         self.assertEqual(self.stripe_calls, [])
 
+    def test_paid_checkout_without_buyer_binding_returns_retryable_error(self):
+        # Stripe must not receive 200 before a durable account binding exists.
+        self.app = create_staging_webhook_app(
+            webhook_secret=self.secret,
+            retrieve_session=lambda _sid: self.session,
+            list_line_items=lambda _sid: self.lines,
+            bindings=StubBindings(None), store=self.store,
+            price_allowlist={"price_callproof": PricePlan("call_proof", 1999)},
+            clock=lambda: self.now,
+        )
+        body, headers = self.signed()
+        status, response = self.call(
+            "/staging/stripe-webhook", body=body, method="POST", headers=headers
+        )
+        self.assertEqual(status, 503)
+        self.assertEqual(response["error"], "fulfillment_unavailable")
+        self.assertFalse(self.store.authorized("buyer_1", "call_proof"))
+
     def test_api_failure_never_grants(self):
         self.session = dict(self.session, id="cs_other")
         body, headers = self.signed()
