@@ -1,5 +1,7 @@
 # Privi-Gen
 
+[Explore the Privi Universe demos](https://privi-universe-demo.onrender.com/) or [compare Privi World Corp’s paid services](https://privi-services.onrender.com/), including the [$19.99 one-time AI agent security review](https://privi-services.onrender.com/ai-agent-security-review/).
+
 Privi-Gen is the central **source inventory and workspace generator** for the Privi family of repositories.
 
 The workspace generator commands **do not** deploy, mint, bridge, activate a financial mainnet, modify a running service, or replace source files in other repositories. Existing projects remain the source of truth for their runtime code.
