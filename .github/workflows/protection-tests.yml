@@ -15,6 +15,7 @@ on:
       - 'tests/test_postgres_entitlement_store.py'
       - 'tests/test_postgres_integration.py'
       - 'tests/test_checkout_bindings_integration.py'
+      - 'tests/test_bound_checkout_postgres_e2e.py'
       - '.github/workflows/protection-tests.yml'
   pull_request:
     paths:
@@ -30,6 +31,7 @@ on:
       - 'tests/test_postgres_entitlement_store.py'
       - 'tests/test_postgres_integration.py'
       - 'tests/test_checkout_bindings_integration.py'
+      - 'tests/test_bound_checkout_postgres_e2e.py'
       - '.github/workflows/protection-tests.yml'
   workflow_dispatch:
 
@@ -97,3 +99,5 @@ jobs:
         run: python -m unittest discover -s tests -p 'test_postgres_integration.py' -v
       - name: Test immutable buyer-to-checkout bindings in PostgreSQL
         run: python -m unittest discover -s tests -p 'test_checkout_bindings_integration.py' -v
+      - name: Test signed checkout with PostgreSQL binding and access
+        run: python -m unittest discover -s tests -p 'test_bound_checkout_postgres_e2e.py' -v
