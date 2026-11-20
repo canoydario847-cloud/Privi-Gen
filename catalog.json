@@ -16,7 +16,7 @@
         "gate-sdk",
         "guard-sdk"
       ],
-      "visibility": "public"
+      "visibility": "private"
     },
     {
       "name": "Privi",
@@ -36,7 +36,7 @@
       "source_roots": [
         "BlockChain.jsx"
       ],
-      "visibility": "public"
+      "visibility": "private"
     },
     {
       "name": "Privi-Chainflow",
