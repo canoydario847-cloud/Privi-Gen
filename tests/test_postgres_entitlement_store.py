@@ -23,7 +23,11 @@ class FakeCursor:
         return False
 
     def execute(self, query, params):
-        if query.strip().startswith("INSERT"):
+        if query.strip().startswith("SELECT pg_advisory_xact_lock"):
+            self.row = (None,)
+        elif query.strip().startswith("SELECT 1 FROM privi_blocked_checkouts"):
+            self.row = None
+        elif query.strip().startswith("INSERT"):
             session, event, buyer, customer, price, scope, cents, currency = params
             if session not in self.db and all(r[0] != event for r in self.db.values()):
                 self.db[session] = (event, buyer, customer, price, scope, cents, currency, False)
