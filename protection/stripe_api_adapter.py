@@ -50,6 +50,14 @@ def fulfill_from_stripe_api(
     items = page.get("data")
     if not isinstance(items, list) or len(items) != 1:
         raise ValueError("Exactly one complete Stripe line item required")
+    # A signed, paid checkout can arrive before the application's durable
+    # buyer binding is committed. Returning False would cause the webhook
+    # endpoint to send HTTP 200, suppressing provider retries and potentially
+    # leaving a paid customer without access indefinitely.
+    if session.get("payment_status") == "paid":
+        buyer = bindings.buyer_for(session_id)
+        if not isinstance(buyer, str) or not buyer.strip():
+            raise ValueError("Paid checkout buyer binding not ready; retry")
     return fulfill_bound_checkout(
         payload=payload, signature=signature, webhook_secret=webhook_secret,
         verified_session=session, verified_line_items=items,
