@@ -111,6 +111,26 @@ class PostgresEntitlementStore:
                 )
                 return cursor.fetchone() == (True,)
 
+    def purchase_for_session(self, session_id: str) -> dict | None:
+        """Return immutable server-side purchase facts for reconciliation."""
+        if not isinstance(session_id, str) or not session_id.strip():
+            return None
+        with closing(self.connect()) as conn:
+            with conn.cursor() as cursor:
+                cursor.execute(
+                    """SELECT buyer_id,customer_id,amount_cents,currency,revoked
+                       FROM privi_processed_checkouts WHERE session_id=%s""",
+                    (session_id,),
+                )
+                row = cursor.fetchone()
+                if row is None:
+                    return None
+                return {
+                    "buyer_id": row[0], "customer_id": row[1],
+                    "amount_cents": row[2], "currency": row[3],
+                    "revoked": row[4],
+                }
+
     def revoke_session(self, session_id: str) -> bool:
         # Only call after authoritative provider refund/dispute verification
         # or a trusted administrator's revocation decision.
