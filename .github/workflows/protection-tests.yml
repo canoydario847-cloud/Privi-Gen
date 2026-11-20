@@ -12,6 +12,7 @@ on:
       - 'tests/test_paid_access_e2e.py'
       - 'tests/test_paid_access_http_e2e.py'
       - 'tests/test_checkout_fulfillment.py'
+      - 'tests/test_postgres_entitlement_store.py'
       - '.github/workflows/protection-tests.yml'
   pull_request:
     paths:
@@ -24,6 +25,7 @@ on:
       - 'tests/test_paid_access_e2e.py'
       - 'tests/test_paid_access_http_e2e.py'
       - 'tests/test_checkout_fulfillment.py'
+      - 'tests/test_postgres_entitlement_store.py'
       - '.github/workflows/protection-tests.yml'
   workflow_dispatch:
 
@@ -55,3 +57,5 @@ jobs:
         run: python -m unittest discover -s tests -p 'test_paid_access_http_e2e.py' -v
       - name: Verify server-bound paid checkout fulfillment
         run: python -m unittest discover -s tests -p 'test_checkout_fulfillment.py' -v
+      - name: PostgreSQL store contract tests (mock connection)
+        run: python -m unittest discover -s tests -p 'test_postgres_entitlement_store.py' -v
