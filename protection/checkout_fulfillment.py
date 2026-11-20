@@ -81,6 +81,10 @@ def fulfill_bound_checkout(
     Bindings must be created at Checkout creation by trusted authenticated
     application code, not in the webhook handler.
     """
+    # Verify authenticity before even looking up a buyer binding. An unknown
+    # session must not turn an invalid signature into a quiet no-op.
+    kwargs = {"clock": clock} if clock is not None else {}
+    verify_stripe_signature(payload, signature, webhook_secret, **kwargs)
     if not isinstance(verified_session, Mapping):
         return False
     session_id = verified_session.get("id")
