@@ -108,7 +108,8 @@ class StripeAdapterTests(unittest.TestCase):
         self.assertFalse(self.store.authorized("buyer", "call_proof"))
 
     def test_missing_or_wrong_buyer_denied(self):
-        self.assertFalse(self.attempt(buyer=None))
+        with self.assertRaisesRegex(ValueError, "binding not ready"):
+            self.attempt(buyer=None)
         with self.assertRaises(ValueError):
             self.attempt(buyer="other")
         self.assertFalse(self.store.authorized("buyer", "call_proof"))
