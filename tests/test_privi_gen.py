@@ -55,13 +55,13 @@ class SyncTests(unittest.TestCase):
     def test_sync_does_not_overwrite_existing_directory(self):
         with tempfile.TemporaryDirectory() as temp:
             base = Path(temp)
-            existing = base / "Privi-Network"
+            existing = base / "Privi-Boot-code"
             existing.mkdir()
             marker = existing / "do-not-overwrite"
             marker.write_text("keep me", encoding="utf-8")
             data = privi_gen.load_catalog()
-            result = privi_gen.sync(data, base, ["Privi-Network"])
-            self.assertEqual(result["projects"]["Privi-Network"]["status"], "skipped-existing")
+            result = privi_gen.sync(data, base, ["Privi-Boot-code"])
+            self.assertEqual(result["projects"]["Privi-Boot-code"]["status"], "skipped-existing")
             self.assertEqual(marker.read_text(encoding="utf-8"), "keep me")
             self.assertTrue((base / "privi-lock.json").exists())
 
