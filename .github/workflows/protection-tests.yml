@@ -22,6 +22,7 @@ on:
       - 'tests/test_staging_http_postgres_e2e.py'
       - 'tests/test_refund_reconciliation_postgres.py'
       - 'tests/test_pregrant_refund_postgres.py'
+      - 'tests/test_payment_reversal_postgres.py'
       - '.github/workflows/protection-tests.yml'
   pull_request:
     paths:
@@ -44,6 +45,7 @@ on:
       - 'tests/test_staging_http_postgres_e2e.py'
       - 'tests/test_refund_reconciliation_postgres.py'
       - 'tests/test_pregrant_refund_postgres.py'
+      - 'tests/test_payment_reversal_postgres.py'
       - '.github/workflows/protection-tests.yml'
   workflow_dispatch:
 
@@ -125,3 +127,5 @@ jobs:
         run: python -m unittest discover -s tests -p 'test_refund_reconciliation_postgres.py' -v
       - name: Test pre-grant refund blocks and concurrent delivery against PostgreSQL
         run: python -m unittest discover -s tests -p 'test_pregrant_refund_postgres.py' -v
+      - name: Test signed refund/dispute adapter against real PostgreSQL
+        run: python -m unittest discover -s tests -p 'test_payment_reversal_postgres.py' -v
