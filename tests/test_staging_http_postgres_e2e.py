@@ -49,6 +49,11 @@ class HTTPPostgresPaidAccessTests(unittest.TestCase):
             "id": "price_pro", "unit_amount": 3500, "currency": "usd",
         }}]}
         self.calls = []
+        self.session["payment_intent"] = "pi_ci"
+        self.charge = {"id": "ch_ci", "object": "charge", "payment_intent": "pi_ci",
+                       "amount": 3500, "amount_refunded": 3500, "currency": "usd", "disputed": False}
+        self.intent = {"id": "pi_ci", "object": "payment_intent", "latest_charge": "ch_ci",
+                       "customer": "cus_ci", "amount": 3500, "currency": "usd"}
 
         def retrieve(session_id):
             self.calls.append(("session", session_id))
@@ -66,6 +71,9 @@ class HTTPPostgresPaidAccessTests(unittest.TestCase):
                 "price_pro": PricePlan("all_services", 3500),
                 "price_callproof": PricePlan("call_proof", 1999),
             }, clock=lambda: self.now,
+            retrieve_charge=lambda key: self.charge,
+            retrieve_payment_intent=lambda key: self.intent,
+            list_checkout_sessions=lambda key: {"has_more": False, "data": [self.session]},
         )
 
     def request(self, path, *, buyer=None, method="GET", body=b"", headers=()):
@@ -83,8 +91,8 @@ class HTTPPostgresPaidAccessTests(unittest.TestCase):
         asyncio.run(self.app(scope, receive, send))
         return next(x["status"] for x in sent if x["type"] == "http.response.start")
 
-    def webhook(self, *, bad_signature=False):
-        body = json.dumps(self.event).encode()
+    def webhook(self, *, bad_signature=False, event=None):
+        body = json.dumps(self.event if event is None else event).encode()
         digest = hmac.new(
             self.secret.encode(), str(self.now).encode() + b"." + body,
             hashlib.sha256,
@@ -139,6 +147,37 @@ class HTTPPostgresPaidAccessTests(unittest.TestCase):
         self.assertEqual(self.webhook(), 200)
         self.assertEqual(self.request("/premium/guard", method="POST", headers=(
             (b"x-buyer-id", b"buyer_ci"),)), 401)
+
+    def reversal(self, kind="charge.refunded", *, bad_signature=False):
+        obj = {"object": "charge", "id": "ch_ci"} if kind == "charge.refunded" else {
+            "object": "dispute", "id": "dp_ci", "charge": "ch_ci"}
+        return self.webhook(event={"id": "evt_reverse", "type": kind,
+                                   "data": {"object": obj}}, bad_signature=bad_signature)
+
+    def test_http_refund_before_checkout(self):
+        self.bindings.bind("cs_ci", "buyer_ci")
+        self.assertEqual(self.reversal(), 200)
+        self.assertEqual(self.webhook(), 200)
+        self.assertEqual(self.request("/premium/guard", buyer="buyer_ci", method="POST"), 403)
+        self.assertEqual(self.reversal(), 200)
+
+    def test_http_dispute_after_checkout(self):
+        self.bindings.bind("cs_ci", "buyer_ci")
+        self.assertEqual(self.webhook(), 200)
+        self.assertTrue(self.store.authorized("buyer_ci", "guard"))
+        self.charge.update(disputed=True, amount_refunded=0)
+        self.assertEqual(self.reversal("charge.dispute.created", bad_signature=True), 400)
+        self.assertTrue(self.store.authorized("buyer_ci", "guard"))
+        self.assertEqual(self.reversal("charge.dispute.created"), 200)
+        self.assertEqual(self.webhook(), 200)
+        self.assertFalse(self.store.authorized("buyer_ci", "guard"))
+
+    def test_http_reversal_without_binding_retries(self):
+        self.assertEqual(self.reversal(), 503)
+        self.bindings.bind("cs_ci", "buyer_ci")
+        self.assertEqual(self.reversal(), 200)
+        self.assertEqual(self.webhook(), 200)
+        self.assertFalse(self.store.authorized("buyer_ci", "guard"))
 
 
 if __name__ == "__main__":
